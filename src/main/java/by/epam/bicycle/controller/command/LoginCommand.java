@@ -1,4 +1,4 @@
-package by.epam.bicycle.service.command;
+package by.epam.bicycle.controller.command;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import by.epam.bicycle.config.ConfigurationManager;
 import by.epam.bicycle.config.MessageManager;
+import by.epam.bicycle.controller.CommandException;
 import by.epam.bicycle.dao.ConnectionPool;
 import by.epam.bicycle.dao.DAOException;
 import by.epam.bicycle.dao.impl.BicycleDAO;
@@ -25,7 +26,6 @@ import by.epam.bicycle.entity.BicycleType;
 import by.epam.bicycle.entity.RentalPoint;
 import by.epam.bicycle.entity.Role;
 import by.epam.bicycle.entity.User;
-import by.epam.bicycle.service.CommandException;
 
 public class LoginCommand implements ActionCommand {
 	private static final String PARAM_NAME_LOGIN = "login";

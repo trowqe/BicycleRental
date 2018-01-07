@@ -1,4 +1,4 @@
-package by.epam.bicycle.service.command;
+package by.epam.bicycle.controller.command;
 
 import java.sql.Connection;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import by.epam.bicycle.config.ConfigurationManager;
+import by.epam.bicycle.controller.CommandException;
 import by.epam.bicycle.dao.ConnectionPool;
 import by.epam.bicycle.dao.DAOException;
 import by.epam.bicycle.dao.impl.BicycleDAO;
@@ -14,7 +15,6 @@ import by.epam.bicycle.dao.impl.RentalPointDAO;
 import by.epam.bicycle.entity.Bicycle;
 import by.epam.bicycle.entity.BicycleType;
 import by.epam.bicycle.entity.RentalPoint;
-import by.epam.bicycle.service.CommandException;
 
 public class FilterBicyclesCommand implements ActionCommand {
 	private static final String PARAM_NAME_RENTAL_POINT = "rentalpoint";

@@ -6,7 +6,7 @@
 		<ul class="topnav">
 			<li>
 				<a href="#" class="logo">
-					<img src="img/bike.png" width="70" height="70" class="logo"/>
+					<img src="img/bike.png" height="70" class="logo"/>
 				</a>
 			</li>
 			<li><a href="controller?command=filterbicycles" class="active">Велосипеды</a></li>

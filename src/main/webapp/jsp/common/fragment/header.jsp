@@ -6,7 +6,7 @@
 	<ul class="topnav">
 		<li>
 			<a href="index.html" class="logo"> 
-				<img src="img/bike.png" width="70" height="70" class="logo" />
+				<img src="img/bike.png" height="70" class="logo" />
 			</a>
 		</li>
 		<li><h1>Прокат велосипедов</h1></li>

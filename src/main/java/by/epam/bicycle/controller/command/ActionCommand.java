@@ -1,4 +1,4 @@
-package by.epam.bicycle.service.command;
+package by.epam.bicycle.controller.command;
 
 import javax.servlet.http.HttpServletRequest;
 

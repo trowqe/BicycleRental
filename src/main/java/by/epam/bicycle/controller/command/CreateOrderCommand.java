@@ -1,4 +1,4 @@
-package by.epam.bicycle.service.command;
+package by.epam.bicycle.controller.command;
 
 import java.sql.Connection;
 import java.util.List;
@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import by.epam.bicycle.config.ConfigurationManager;
+import by.epam.bicycle.controller.CommandException;
 import by.epam.bicycle.dao.ConnectionPool;
 import by.epam.bicycle.dao.DAOException;
 import by.epam.bicycle.dao.impl.BicycleDAO;
@@ -21,7 +22,6 @@ import by.epam.bicycle.entity.Rent;
 import by.epam.bicycle.entity.RentalPoint;
 import by.epam.bicycle.entity.Tariff;
 import by.epam.bicycle.entity.User;
-import by.epam.bicycle.service.CommandException;
 
 public class CreateOrderCommand implements ActionCommand {
 	private static final String ORDER_BICYCLE_ID_PARAM = "orderbikeid";

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import by.epam.bicycle.config.ConfigurationManager;
 import by.epam.bicycle.config.MessageManager;
-import by.epam.bicycle.service.command.ActionCommand;
+import by.epam.bicycle.controller.command.ActionCommand;
 
 @WebServlet("/controller")
 public class Controller extends HttpServlet {

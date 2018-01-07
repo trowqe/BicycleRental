@@ -3,9 +3,9 @@ package by.epam.bicycle.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import by.epam.bicycle.config.MessageManager;
-import by.epam.bicycle.service.command.ActionCommand;
-import by.epam.bicycle.service.command.CommandEnum;
-import by.epam.bicycle.service.command.EmptyCommand;
+import by.epam.bicycle.controller.command.ActionCommand;
+import by.epam.bicycle.controller.command.CommandEnum;
+import by.epam.bicycle.controller.command.EmptyCommand;
 
 public class ActionFactory {
 	

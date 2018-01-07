@@ -1,4 +1,4 @@
-package by.epam.bicycle.service.command;
+package by.epam.bicycle.controller.command;
 
 public enum CommandEnum {
 	LOGIN {

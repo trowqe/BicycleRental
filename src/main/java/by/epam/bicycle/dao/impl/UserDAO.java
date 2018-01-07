@@ -54,7 +54,7 @@ public class UserDAO extends AbstractDAO<Long, User> {
 		Statement statement = null;
 		ResultSet resultSet = null;
 		try {
-			statement = wrappedConnection.getStatement();
+			statement = getWrappedConnection().getStatement();
 			resultSet = statement.executeQuery(SQL_SELECT_ALL_USERS);
 	
 			EntityCreatorDirector creatorDirector = new EntityCreatorDirector();
@@ -67,8 +67,8 @@ public class UserDAO extends AbstractDAO<Long, User> {
 		} catch (SQLException e) {
 			throw new DAOException("Cannot get all users", e);
 		} finally {
-			wrappedConnection.closeResultSet(resultSet);
-			wrappedConnection.closeStatement(statement);		
+			getWrappedConnection().closeResultSet(resultSet);
+			getWrappedConnection().closeStatement(statement);		
 		}
 
 		return users;
@@ -138,7 +138,7 @@ public class UserDAO extends AbstractDAO<Long, User> {
 		ResultSet resultSet = null;
 		
 		try {
-			statement = wrappedConnection.getPreparedStatement(SQL_SELECT_USER_BY_LOGIN_AND_PASSWORD, login, password);
+			statement = getWrappedConnection().getPreparedStatement(SQL_SELECT_USER_BY_LOGIN_AND_PASSWORD, login, password);
 			resultSet = statement.executeQuery();
 			
 			if (resultSet.next()) { 
@@ -149,8 +149,8 @@ public class UserDAO extends AbstractDAO<Long, User> {
 		} catch (SQLException e) {
 			throw new DAOException("Cannot get user", e);
 		} finally {
-			wrappedConnection.closeResultSet(resultSet);
-			wrappedConnection.closeStatement(statement);		
+			getWrappedConnection().closeResultSet(resultSet);
+			getWrappedConnection().closeStatement(statement);		
 		}
 		
 		return user;

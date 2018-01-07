@@ -46,7 +46,7 @@ public class RentalPointDAO extends AbstractDAO<Long, RentalPoint> {
 		Statement statement = null;
 		ResultSet resultSet = null;
 		try {
-			statement = wrappedConnection.getStatement();
+			statement = getWrappedConnection().getStatement();
 			resultSet = statement.executeQuery(SQL_SELECT_ALL_RENTAL_POINTS);
 
 			EntityCreatorDirector creatorDirector = new EntityCreatorDirector();
@@ -59,8 +59,8 @@ public class RentalPointDAO extends AbstractDAO<Long, RentalPoint> {
 		} catch (SQLException e) {
 			throw new DAOException("Cannot get all rental points", e);
 		} finally {
-			wrappedConnection.closeResultSet(resultSet);
-			wrappedConnection.closeStatement(statement);
+			getWrappedConnection().closeResultSet(resultSet);
+			getWrappedConnection().closeStatement(statement);
 		}
 
 		return rentalPoints;

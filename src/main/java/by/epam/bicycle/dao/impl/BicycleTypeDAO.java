@@ -43,7 +43,7 @@ public class BicycleTypeDAO extends AbstractDAO<Long, BicycleType> {
 		Statement statement = null;
 		ResultSet resultSet = null;
 		try {
-			statement = wrappedConnection.getStatement();
+			statement = getWrappedConnection().getStatement();
 			resultSet = statement.executeQuery(SQL_SELECT_ALL_RENTAL_POINTS);
 	
 			EntityCreatorDirector creatorDirector = new EntityCreatorDirector();
@@ -56,8 +56,8 @@ public class BicycleTypeDAO extends AbstractDAO<Long, BicycleType> {
 		} catch (SQLException e) {
 			throw new DAOException("Cannot get all bicycle types", e);
 		} finally {
-			wrappedConnection.closeResultSet(resultSet);
-			wrappedConnection.closeStatement(statement);		
+			getWrappedConnection().closeResultSet(resultSet);
+			getWrappedConnection().closeStatement(statement);		
 		}
 
 		return bicycleTypes;

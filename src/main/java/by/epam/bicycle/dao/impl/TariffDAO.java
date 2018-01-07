@@ -69,7 +69,7 @@ public class TariffDAO extends AbstractDAO<Long, Tariff>  {
 		ResultSet resultSet = null;
 
 		try {
-			statement = wrappedConnection.getPreparedStatement(SQL_SELECT_TARIFF_BY_BICYCLE_TYPE_ID, bicycleTypeId);
+			statement = getWrappedConnection().getPreparedStatement(SQL_SELECT_TARIFF_BY_BICYCLE_TYPE_ID, bicycleTypeId);
 			resultSet = statement.executeQuery();
 
 			EntityCreatorDirector creatorDirector = new EntityCreatorDirector();
@@ -82,8 +82,8 @@ public class TariffDAO extends AbstractDAO<Long, Tariff>  {
 		} catch (SQLException e) {
 			throw new DAOException("Cannot get tariffs", e);
 		} finally {
-			wrappedConnection.closeResultSet(resultSet);
-			wrappedConnection.closeStatement(statement);
+			getWrappedConnection().closeResultSet(resultSet);
+			getWrappedConnection().closeStatement(statement);
 		}
 
 		return tariffs;

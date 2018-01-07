@@ -60,7 +60,7 @@ public class BicycleDAO extends AbstractDAO<Long, Bicycle> {
 		Statement statement = null;
 		ResultSet resultSet = null;
 		try {
-			statement = wrappedConnection.getStatement();
+			statement = getWrappedConnection().getStatement();
 			resultSet = statement.executeQuery(SQL_SELECT_ALL_BICYCLES);
 
 			EntityCreatorDirector creatorDirector = new EntityCreatorDirector();
@@ -73,8 +73,8 @@ public class BicycleDAO extends AbstractDAO<Long, Bicycle> {
 		} catch (SQLException e) {
 			throw new DAOException("Cannot get all bicycles", e);
 		} finally {
-			wrappedConnection.closeResultSet(resultSet);
-			wrappedConnection.closeStatement(statement);
+			getWrappedConnection().closeResultSet(resultSet);
+			getWrappedConnection().closeStatement(statement);
 		}
 
 		return bicycles;
@@ -86,7 +86,7 @@ public class BicycleDAO extends AbstractDAO<Long, Bicycle> {
 		ResultSet resultSet = null;
 		
 		try {
-			statement = wrappedConnection.getPreparedStatement(SQL_SELECT_BICYCLE_BY_ID, id);
+			statement = getWrappedConnection().getPreparedStatement(SQL_SELECT_BICYCLE_BY_ID, id);
 			resultSet = statement.executeQuery();
 			
 			if (resultSet.next()) { 
@@ -97,8 +97,8 @@ public class BicycleDAO extends AbstractDAO<Long, Bicycle> {
 		} catch (SQLException e) {
 			throw new DAOException("Cannot get bicycle", e);
 		} finally {
-			wrappedConnection.closeResultSet(resultSet);
-			wrappedConnection.closeStatement(statement);		
+			getWrappedConnection().closeResultSet(resultSet);
+			getWrappedConnection().closeStatement(statement);		
 		}
 		
 		return bicycle;
@@ -152,7 +152,7 @@ public class BicycleDAO extends AbstractDAO<Long, Bicycle> {
 
 			Object[] arrParams = params.toArray();
 
-			statement = wrappedConnection.getPreparedStatement(sql, arrParams);
+			statement = getWrappedConnection().getPreparedStatement(sql, arrParams);
 			resultSet = statement.executeQuery();
 
 			EntityCreatorDirector creatorDirector = new EntityCreatorDirector();
@@ -165,8 +165,8 @@ public class BicycleDAO extends AbstractDAO<Long, Bicycle> {
 		} catch (SQLException e) {
 			throw new DAOException("Cannot get bicycles", e);
 		} finally {
-			wrappedConnection.closeResultSet(resultSet);
-			wrappedConnection.closeStatement(statement);
+			getWrappedConnection().closeResultSet(resultSet);
+			getWrappedConnection().closeStatement(statement);
 		}
 
 		return bicycles;

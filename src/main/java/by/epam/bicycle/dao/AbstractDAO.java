@@ -10,7 +10,7 @@ public abstract class AbstractDAO<K, T extends Entity> implements EntityDAO<K, T
 	/**
 	 * Connection to the database in specific wrapper.
 	 */
-	protected WrapperConnection wrappedConnection;
+	private WrapperConnection wrappedConnection;
 	
 	/**
 	 * Default constructor.
@@ -24,7 +24,16 @@ public abstract class AbstractDAO<K, T extends Entity> implements EntityDAO<K, T
 	 * @param connection concrete connection to the database.
 	 */
 	public AbstractDAO(Connection connection) {
-		wrappedConnection = new WrapperConnection(connection);
+		setWrappedConnection(new WrapperConnection(connection));
 	}
+
+	public WrapperConnection getWrappedConnection() {
+		return wrappedConnection;
+	}
+
+	public void setWrappedConnection(WrapperConnection wrappedConnection) {
+		this.wrappedConnection = wrappedConnection;
+	}
+	
 	
 }

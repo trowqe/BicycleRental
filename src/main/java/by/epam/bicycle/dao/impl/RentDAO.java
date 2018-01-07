@@ -61,14 +61,14 @@ public class RentDAO extends AbstractDAO<Long, Rent> {
 			long userId = entity.getUser().getId();
 			long bicycleId = entity.getBicycle().getId();
 			long tariffId = entity.getTariff().getId();
-			statement = wrappedConnection.getPreparedStatement(SQL_INSERT_NEW_RENT, new Date(), userId, bicycleId,
+			statement = getWrappedConnection().getPreparedStatement(SQL_INSERT_NEW_RENT, new Date(), userId, bicycleId,
 					tariffId);
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new DAOException("Cannot insert rent", e);
 		} finally {
-			wrappedConnection.closeResultSet(resultSet);
-			wrappedConnection.closeStatement(statement);
+			getWrappedConnection().closeResultSet(resultSet);
+			getWrappedConnection().closeStatement(statement);
 		}
 	}
 

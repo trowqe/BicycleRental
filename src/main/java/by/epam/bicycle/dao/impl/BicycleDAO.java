@@ -38,7 +38,7 @@ public class BicycleDAO extends AbstractDAO<Long, Bicycle> {
 		return findListOfEntities(SQL_SELECT_ALL_BICYCLES);
 	}
 	
-	public Bicycle findEntityById(long id) throws DAOException {
+	public Bicycle findEntityById(Long id) throws DAOException {
 		return findSingleEntitie(SQL_SELECT_BICYCLE_BY_ID, id);
 	}
 	

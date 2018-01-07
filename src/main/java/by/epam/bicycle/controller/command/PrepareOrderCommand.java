@@ -1,6 +1,5 @@
 package by.epam.bicycle.controller.command;
 
-import java.sql.Connection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,50 +8,21 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import by.epam.bicycle.config.ConfigurationManager;
-import by.epam.bicycle.controller.CommandException;
-import by.epam.bicycle.dao.ConnectionPool;
-import by.epam.bicycle.dao.DAOException;
-import by.epam.bicycle.dao.impl.BicycleDAO;
-import by.epam.bicycle.dao.impl.TariffDAO;
 import by.epam.bicycle.entity.Bicycle;
 import by.epam.bicycle.entity.Tariff;
+import by.epam.bicycle.service.ServiceException;
+import by.epam.bicycle.service.impl.BicycleService;
+import by.epam.bicycle.service.impl.TariffService;
 
 public class PrepareOrderCommand implements ActionCommand {
 	private static final String BICYCLE_ID_PARAM = "bicycleid";
 	private static Logger logger = LogManager.getLogger(PrepareOrderCommand.class);
-	
-	private Bicycle getBicycleById(long bicycleId) throws CommandException {
-		ConnectionPool pool = ConnectionPool.getInstance();
-		Connection connection = pool.getConnection();
-		BicycleDAO dao = new BicycleDAO(connection);
-		try {
-			Bicycle bicycle = dao.findEntityById(bicycleId);
-			return bicycle;
-		} catch (DAOException e) {
-			throw new CommandException("Cannot get bicycle", e);
-		} finally {
-			pool.returnConnectionToPool(connection);
-		}
-	}
-	
-	private List<Tariff> getTarriffListByBicycleTypeId(long bicycleTypeId) throws CommandException {
-		ConnectionPool pool = ConnectionPool.getInstance();
-		Connection connection = pool.getConnection();
-		TariffDAO dao = new TariffDAO(connection);
-		try {
-			List<Tariff> tariffs = dao.findTariffsByBicycleTypeId(bicycleTypeId);
-			return tariffs;
-		} catch (DAOException e) {
-			throw new CommandException("Cannot get tariffs", e);
-		} finally {
-			pool.returnConnectionToPool(connection);
-		}
-	}
-	
+		
 	public String execute(HttpServletRequest request) {
 		long bicycleId = Long.parseLong(request.getParameter(BICYCLE_ID_PARAM));
 		try {
-			Bicycle bicycle = getBicycleById(bicycleId);
+			BicycleService bicycleService = new BicycleService();
+			Bicycle bicycle = bicycleService.findEntityById(bicycleId);
 			Long rentPointId = bicycle.getPoint().getId();
 			String orderRentPoint = bicycle.getPoint().getAddress();
 			String orderBicycleModel =  bicycle.getModel().getFirm() + " " + bicycle.getModel().getModel();
@@ -62,10 +32,11 @@ public class PrepareOrderCommand implements ActionCommand {
 			request.setAttribute("orderBicycleModel", orderBicycleModel);
 			
 			Long bicycleTypeId = bicycle.getModel().getBicycleType().getId();
-			List<Tariff> tariffs = getTarriffListByBicycleTypeId(bicycleTypeId);
+			TariffService tariffService = new TariffService();
+			List<Tariff> tariffs = tariffService.getTarriffListByBicycleTypeId(bicycleTypeId);
 			request.setAttribute("tariffs", tariffs);
 			
-		} catch (CommandException e) {
+		} catch (ServiceException e) {
 			logger.error(e.getMessage(), e);
 		}
 		

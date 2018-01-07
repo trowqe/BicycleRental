@@ -14,5 +14,12 @@ public class BicycleTypeCreator implements EntityCreator<BicycleType> {
 		bicycleType.setName(resultSet.getString(BicycleType.NAME_DB_FIELD));
 		return bicycleType;
 	}
+	
+	public BicycleType execute(long id, ResultSet resultSet) throws SQLException {
+		BicycleType bicycleType = execute(resultSet);
+		bicycleType.setId(id);
+		return bicycleType;
+		
+	}
 
 }

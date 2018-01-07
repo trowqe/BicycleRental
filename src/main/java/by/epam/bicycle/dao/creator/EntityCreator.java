@@ -7,4 +7,5 @@ import by.epam.bicycle.entity.Entity;
 
 public interface EntityCreator <T extends Entity> {
 	public T execute(ResultSet resultSet) throws SQLException;
+	public T execute(long id, ResultSet resultSet) throws SQLException;
 }

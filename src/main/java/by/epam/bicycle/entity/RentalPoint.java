@@ -14,17 +14,22 @@ package by.epam.bicycle.entity;
 
 public class RentalPoint extends Entity {
 	private static final long serialVersionUID = 1L;
-	public static final String RENTAL_POINT_ID_DB_FIELD = "rental_point_id";
+	
+	public static final String RENTAL_POINT_ID_DB_FIELD = "id";
 	public static final String ADDRESS_DB_FIELD = "address";
 	public static final String PHONE_DB_FIELD = "phone";
 	public static final String WORKING_HOURS_DB_FIELD = "working_hours";
-
+	public static final String TABLE_NAME = "rental_points";
 	
 	private String address;
 	private String phone;
 	private String workingHours;
 	
 	public RentalPoint() {
+	}
+	
+	public RentalPoint(long id) {
+		setId(id);
 	}
 
 	public RentalPoint(long id, String address, String phone, String workingHours) {

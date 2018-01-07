@@ -17,11 +17,13 @@ import java.math.BigDecimal;
 
 public class Tariff extends Entity {
 	private static final long serialVersionUID = 1L;
+	
 	public static final String TARIFF_ID_DB_FIELD = "id";
 	public static final String RENTAL_TIME_DB_FIELD = "rental_time";
 	public static final String PRICE_DB_FIELD = "price";
 	public static final String BICYCLE_TYPE_ID_DB_FIELD = "bicycle_type_id";
 	public static final String DESCRIPTION_FIELD = "description";
+	public static final String TABLE_NAME = "tariffs";
 	
 	private float rentalTime;
 	private BigDecimal price;

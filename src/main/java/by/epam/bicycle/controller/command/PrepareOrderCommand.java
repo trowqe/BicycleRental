@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.epam.bicycle.config.ConfigurationManager;
 import by.epam.bicycle.controller.CommandException;
 import by.epam.bicycle.dao.ConnectionPool;
@@ -16,6 +19,7 @@ import by.epam.bicycle.entity.Tariff;
 
 public class PrepareOrderCommand implements ActionCommand {
 	private static final String BICYCLE_ID_PARAM = "bicycleid";
+	private static Logger logger = LogManager.getLogger(PrepareOrderCommand.class);
 	
 	private Bicycle getBicycleById(long bicycleId) throws CommandException {
 		ConnectionPool pool = ConnectionPool.getInstance();
@@ -62,7 +66,7 @@ public class PrepareOrderCommand implements ActionCommand {
 			request.setAttribute("tariffs", tariffs);
 			
 		} catch (CommandException e) {
-			//add
+			logger.error(e.getMessage(), e);
 		}
 		
 		

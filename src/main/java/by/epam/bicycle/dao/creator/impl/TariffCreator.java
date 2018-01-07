@@ -17,10 +17,17 @@ public class TariffCreator implements EntityCreator<Tariff> {
 		tariff.setRentalTime(resultSet.getFloat(Tariff.RENTAL_TIME_DB_FIELD));
 		tariff.setDescription(resultSet.getString(Tariff.DESCRIPTION_FIELD));
 		
+		long bicycleTypeId = resultSet.getLong(Tariff.BICYCLE_TYPE_ID_DB_FIELD);
 		EntityCreatorDirector creatorDirector = new EntityCreatorDirector();
 		EntityCreator<BicycleType> creator = creatorDirector.getCreator(BicycleType.class);
-		BicycleType bicycleType = creator.execute(resultSet);
+		BicycleType bicycleType = creator.execute(bicycleTypeId, resultSet);
 		tariff.setBicycleType(bicycleType);
+		return tariff;
+	}
+	
+	public Tariff execute(long id, ResultSet resultSet) throws SQLException {
+		Tariff tariff = execute(resultSet);
+		tariff.setId(id);
 		return tariff;
 	}
 

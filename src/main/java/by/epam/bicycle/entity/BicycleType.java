@@ -11,13 +11,19 @@ package by.epam.bicycle.entity;
 
 public class BicycleType extends Entity {
 	private static final long serialVersionUID = 1L;
-	public static final String BICYCLE_TYPE_ID_DB_FIELD = "bicycle_type_id";
+	
+	public static final String BICYCLE_TYPE_ID_DB_FIELD = "id";
 	public static final String NAME_DB_FIELD = "name";
+	public static final String TABLE_NAME = "bicycle_types";
 	
 	private String name;
 	
 	public BicycleType() {
 	}
+	
+	public BicycleType(long id) {
+		setId(id);
+	}	
 	
 	public BicycleType(long id, String name) {
 		super(id);

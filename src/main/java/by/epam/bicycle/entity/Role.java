@@ -13,6 +13,8 @@ public class Role extends Entity {
 	private static final long serialVersionUID = 1L;
 	public static final String ROLE_ID_DB_FIELD = "id";
 	public static final String NAME_DB_FIELD = "rolename";
+	public static final String TABLE_NAME = "roles";
+	
 	private static final String ADMIN_ROLE_NAME = "admin";
 	private static final String USER_ROLE_NAME = "user";
 	

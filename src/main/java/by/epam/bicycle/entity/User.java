@@ -13,6 +13,7 @@ import java.util.Date;
 
 public class User extends Entity {
 	private static final long serialVersionUID = 1L;
+	
 	public static final String USER_ID_DB_FIELD = "id";
 	public static final String NAME_DB_FIELD = "name";
 	public static final String SURNAME_DB_FIELD = "surname";
@@ -26,6 +27,7 @@ public class User extends Entity {
 	public static final String BLOCK_DATETIME_DB_FIELD = "block_datetime";
 	public static final String BALANCE_DB_FIELD = "balance";
 	public static final String ROLE_ID_DB_FIELD = "role_id";
+	public static final String TABLE_NAME = "users";
 	
 	/** name of user */
 	private String name;

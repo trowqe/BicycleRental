@@ -147,6 +147,7 @@ public class LoginCommand implements ActionCommand {
 				}
 			}
 		} catch (CommandException e) {
+			logger.error(e.getMessage(), e);
 			request.setAttribute("errorLoginPassMessage", MessageManager.getProperty("message.loginerror"));
 			page = ConfigurationManager.getProperty("path.page.login");
 		}

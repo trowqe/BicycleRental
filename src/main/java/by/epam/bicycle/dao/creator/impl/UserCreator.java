@@ -23,10 +23,18 @@ public class UserCreator implements EntityCreator<User> {
 		user.setBlockDateTime(resultSet.getDate(User.BLOCK_DATETIME_DB_FIELD));
 		user.setLastEnterDateTime(resultSet.getDate(User.LAST_ENTER_DATETIME_DB_FIELD));
 		user.setBalance(resultSet.getBigDecimal(User.BALANCE_DB_FIELD));
+		
 		Role role = new Role();
 		role.setId(resultSet.getLong(User.ROLE_ID_DB_FIELD));
 		role.setName(resultSet.getString(Role.NAME_DB_FIELD));
 		user.setRole(role);
+		
+		return user;
+	}
+	
+	public User execute(long id, ResultSet resultSet) throws SQLException {
+		User user = execute(resultSet);
+		user.setId(id);
 		return user;
 	}
 

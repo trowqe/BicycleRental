@@ -11,14 +11,16 @@ package by.epam.bicycle.entity;
  * @author 				khatkovskaya
  * 
  */
-
+	
 public class BicycleModel extends Entity {
 	private static final long serialVersionUID = 1L;
-	public static final String BICYCLE_MODEL_ID_DB_FIELD = "bicycle_model_id";
+	
+	public static final String ID_DB_FIELD = "id";
 	public static final String MODEL_DB_FIELD = "model";
 	public static final String FIRM_DB_FIELD = "firm";
 	public static final String NOTES_DB_FIELD = "notes";
 	public static final String BICYCLE_TYPE_ID_DB_FIELD = "bicycle_type_id";
+	public static final String TABLE_NAME = "bicycle_models";
 	
 	private BicycleType type;
 	private String model;
@@ -26,6 +28,10 @@ public class BicycleModel extends Entity {
 	private String notes;
 	
 	public BicycleModel() {
+	}
+	
+	public BicycleModel(long id) {
+		setId(id);
 	}
 	
 	public BicycleModel(long id, BicycleType type, String model, String firm, String notes) {

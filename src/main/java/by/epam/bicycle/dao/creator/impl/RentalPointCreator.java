@@ -16,5 +16,12 @@ public class RentalPointCreator implements EntityCreator<RentalPoint> {
 		rentalPoint.setAddress(resultSet.getString(RentalPoint.ADDRESS_DB_FIELD));
 		return rentalPoint;
 	}
+	
+	public RentalPoint execute(long id, ResultSet resultSet) throws SQLException {
+		RentalPoint rentalPoint = execute(resultSet);
+		rentalPoint.setId(id);
+		return rentalPoint;
+		
+	}
 
 }

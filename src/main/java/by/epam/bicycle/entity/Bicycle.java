@@ -13,9 +13,10 @@ package by.epam.bicycle.entity;
 
 public class Bicycle extends Entity {
 	private static final long serialVersionUID = 1L;
-	public static final String BICYCLE_ID_DB_FIELD = "id";
-	public static final String MODEL_ID_DB_FIELD = "model_id";
+	public static final String ID_DB_FIELD = "id";
+	public static final String MODEL_ID_DB_FIELD = "bicycle_model_id";
 	public static final String RENTAL_POINT_ID_DB_FIELD = "rental_point_id";
+	public static final String TABLE_NAME = "bicycles";
 	
 	private BicycleModel model;
 	private RentalPoint point;

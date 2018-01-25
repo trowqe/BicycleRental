@@ -6,7 +6,7 @@ import by.epam.bicycle.dao.AbstractDAO;
 import by.epam.bicycle.dao.DAOException;
 import by.epam.bicycle.entity.BicycleType;
 
-public class BicycleTypeDAO extends AbstractDAO<Long, BicycleType> {
+public class BicycleTypeDAO extends AbstractDAO<BicycleType> {
 
 	public BicycleTypeDAO() {
 		super(BicycleType.class, BicycleType.TABLE_NAME);
@@ -20,7 +20,7 @@ public class BicycleTypeDAO extends AbstractDAO<Long, BicycleType> {
 		throw new UnsupportedOperationException();
 	}
 
-	public void updateById(Long id, BicycleType entity) throws DAOException {
+	public void updateById(long id, BicycleType entity) throws DAOException {
 		throw new UnsupportedOperationException();
 	} 
 

@@ -12,7 +12,7 @@ import by.epam.bicycle.entity.User;
  * @author khatkovskaya
  * 
  */
-public class UserDAO extends AbstractDAO<Long, User> {
+public class UserDAO extends AbstractDAO<User> {
 	public static final String SQL_SELECT_ALL_USERS = "SELECT u.*, r.name FROM users "
 			+ "LEFT JOIN roles r ON u.role_id = r.id";
 	public static final String SQL_SELECT_USER_BY_LOGIN_AND_PASSWORD = "SELECT u.*, r.name as rolename FROM users u "
@@ -31,7 +31,7 @@ public class UserDAO extends AbstractDAO<Long, User> {
 		throw new UnsupportedOperationException();
 	}
 
-	public void updateById(Long id, User entity) throws DAOException {
+	public void updateById(long id, User entity) throws DAOException {
 		throw new UnsupportedOperationException();
 	}
 	

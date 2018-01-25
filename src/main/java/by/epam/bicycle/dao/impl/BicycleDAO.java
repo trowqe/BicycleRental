@@ -8,7 +8,7 @@ import by.epam.bicycle.dao.AbstractDAO;
 import by.epam.bicycle.dao.DAOException;
 import by.epam.bicycle.entity.Bicycle;
 
-public class BicycleDAO extends AbstractDAO<Long, Bicycle> {
+public class BicycleDAO extends AbstractDAO<Bicycle> {
 	private static final String SQL_SELECT_ALL_BICYCLES = "select b.*, m.*, r.*,  t.* from bicycles b "
 			+ "left join bicycle_models m on b.bicycle_model_id = m.id "
 			+ "left join bicycle_types t on m.bicycle_type_id = t.id "
@@ -38,7 +38,7 @@ public class BicycleDAO extends AbstractDAO<Long, Bicycle> {
 		return findListOfEntities(SQL_SELECT_ALL_BICYCLES);
 	}
 	
-	public Bicycle findEntityById(Long id) throws DAOException {
+	public Bicycle findEntityById(long id) throws DAOException {
 		return findSingleEntitie(SQL_SELECT_BICYCLE_BY_ID, id);
 	}
 	
@@ -46,7 +46,7 @@ public class BicycleDAO extends AbstractDAO<Long, Bicycle> {
 		throw new UnsupportedOperationException();
 	}
 
-	public void updateById(Long id, Bicycle entity) throws DAOException {
+	public void updateById(long id, Bicycle entity) throws DAOException {
 		throw new UnsupportedOperationException();
 	}
 

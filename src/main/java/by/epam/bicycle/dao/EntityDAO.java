@@ -8,13 +8,12 @@ import by.epam.bicycle.entity.Entity;
  * 
  * Interface that contains a signatures of general methods of DAO classes.
  * 
- * @param <K> 	the type of identifier
  * @param <T> 	the type of entity
  * 
  * @author khatkovskaya
  * 
  */
-public interface EntityDAO <K, T extends Entity> {
+public interface EntityDAO <T extends Entity> {
 	/**
      * Finds all entities.
      * 
@@ -30,7 +29,7 @@ public interface EntityDAO <K, T extends Entity> {
      * @return founded entity
      * @throws DAOException if something goes wrong
      */
-	T findEntityById(K id) throws DAOException;
+	T findEntityById(long id) throws DAOException;
 	
 	/**
      * Deletes entity founded by it's identifiable field.
@@ -38,7 +37,7 @@ public interface EntityDAO <K, T extends Entity> {
      * @param id identifier of the entity
      * @throws DAOException if something goes wrong
      */
-	void delete(K id) throws DAOException;
+	void delete(long id) throws DAOException;
 
 	/**
      * Deletes concrete entity.
@@ -63,5 +62,5 @@ public interface EntityDAO <K, T extends Entity> {
      * @param entity updated entity
      * @throws DAOException if something goes wrong
      */
-	void updateById(K id, T entity) throws DAOException;
+	void updateById(long id, T entity) throws DAOException;
 }

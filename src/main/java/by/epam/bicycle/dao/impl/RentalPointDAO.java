@@ -6,7 +6,7 @@ import by.epam.bicycle.dao.AbstractDAO;
 import by.epam.bicycle.dao.DAOException;
 import by.epam.bicycle.entity.RentalPoint;
 
-public class RentalPointDAO extends AbstractDAO<Long, RentalPoint> {
+public class RentalPointDAO extends AbstractDAO<RentalPoint> {
 
 	public RentalPointDAO() {
 		super(RentalPoint.class, RentalPoint.TABLE_NAME);
@@ -20,7 +20,7 @@ public class RentalPointDAO extends AbstractDAO<Long, RentalPoint> {
 		throw new UnsupportedOperationException();
 	}
 
-	public void updateById(Long id, RentalPoint entity) throws DAOException {
+	public void updateById(long id, RentalPoint entity) throws DAOException {
 		throw new UnsupportedOperationException();
 	}
 

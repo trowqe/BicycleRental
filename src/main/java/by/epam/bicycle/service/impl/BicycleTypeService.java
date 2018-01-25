@@ -8,11 +8,15 @@ import by.epam.bicycle.dao.ConnectionPool;
 import by.epam.bicycle.dao.DAOException;
 import by.epam.bicycle.dao.impl.BicycleTypeDAO;
 import by.epam.bicycle.entity.BicycleType;
-import by.epam.bicycle.service.EntityService;
+import by.epam.bicycle.service.AbstractService;
 import by.epam.bicycle.service.ServiceException;
 
-public class BicycleTypeService implements EntityService<Long, BicycleType> {
+public class BicycleTypeService extends AbstractService<BicycleType> {
 	
+	public BicycleTypeService() {
+		super(BicycleType.class);
+	}
+
 	public List<BicycleType> findAll() throws ServiceException {
 		List<BicycleType> bicycleTypes = new ArrayList<BicycleType>();
 		ConnectionPool pool = ConnectionPool.getInstance();
@@ -21,31 +25,10 @@ public class BicycleTypeService implements EntityService<Long, BicycleType> {
 		try {
 			bicycleTypes = dao.findAll();
 		} catch (DAOException e) {
-			throw new ServiceException("Cannot get bicycleTypes", e);
+			throw new ServiceException(e);
 		} finally {
 			pool.returnConnectionToPool(connection);
 		}
 		return bicycleTypes;
-	}
-
-	public BicycleType findEntityById(Long id) throws ServiceException {
-		throw new UnsupportedOperationException();	
-	}
-
-	public void delete(BicycleType entity) throws ServiceException {
-		throw new UnsupportedOperationException();	
-	}
-
-	public void create(BicycleType entity) throws ServiceException {
-		throw new UnsupportedOperationException();	
-	}
-
-	public void updateById(Long id, BicycleType entity) throws ServiceException {
-		throw new UnsupportedOperationException();			
-	}
-
-	public void delete(Long id) throws ServiceException {
-		throw new UnsupportedOperationException();	
-		
 	}
 }

@@ -13,7 +13,7 @@ import by.epam.bicycle.dao.creator.EntityCreatorDirector;
 import by.epam.bicycle.entity.Entity;
 
 
-public abstract class AbstractDAO<K, T extends Entity> implements EntityDAO<K, T> {
+public abstract class AbstractDAO<T extends Entity> implements EntityDAO<T> {
 	private final Class<T> entityClass; 
 	private final String tableName; 
 	private WrapperConnection wrappedConnection;
@@ -40,21 +40,24 @@ public abstract class AbstractDAO<K, T extends Entity> implements EntityDAO<K, T
 		this.wrappedConnection = wrappedConnection;
 	}
 	
-	public String getTableName() {
-		return tableName;
+	public void setWrappedConnection(Connection connection) {
+		setWrappedConnection(new WrapperConnection(connection));
 	}
 	
+	public String getTableName() {
+		return tableName;
+	}	
 	
 	public List<T> findAll() throws DAOException {
 		return findListOfEntities(SELECT_ALL_ENTITIES + tableName);
 	}
 		
-	public T findEntityById(K id) throws DAOException {
+	public T findEntityById(long id) throws DAOException {
 		String sql = SELECT_ALL_ENTITIES + tableName + SELECT_ENTITIE_BY_ID;
 		return findSingleEntitie(sql, id);
 	}
 	
-	public void delete(K id) throws DAOException {
+	public void delete(long id) throws DAOException {
 		executeUpdateEntitie(DELETE_ENTITIE_BY_ID, tableName, id);
 	}
 	

@@ -10,7 +10,7 @@ import by.epam.bicycle.dao.AbstractDAO;
 import by.epam.bicycle.dao.DAOException;
 import by.epam.bicycle.entity.Rent;
 
-public class RentDAO extends AbstractDAO<Long, Rent> {
+public class RentDAO extends AbstractDAO<Rent> {
 	private static final String SQL_INSERT_NEW_RENT = "INSERT INTO RENTS(datetime_create, user_id, bicycle_id, tariff_id) VALUES(?, ?, ?, ?)";
 
 	public RentDAO() {
@@ -40,7 +40,7 @@ public class RentDAO extends AbstractDAO<Long, Rent> {
 		}
 	}
 
-	public void updateById(Long id, Rent entity) throws DAOException {
+	public void updateById(long id, Rent entity) throws DAOException {
 		throw new UnsupportedOperationException();
 	}
 

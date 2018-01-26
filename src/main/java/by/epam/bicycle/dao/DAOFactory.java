@@ -21,7 +21,7 @@ import by.epam.bicycle.entity.User;
 public class DAOFactory {
 
 	@SuppressWarnings("unchecked")
-	public <T extends Entity> AbstractDAO<T> getEntityDAO(Class<T> entityClass) {
+	public <T extends Entity> AbstractDAO<T> getEntityDAO(Class<T> entityClass, String language) {
 		AbstractDAO<T> dao = null;
 		if (entityClass.equals(Bicycle.class)) {
 	    	dao = (AbstractDAO<T>) new BicycleDAO();
@@ -42,6 +42,7 @@ public class DAOFactory {
 	    } else {
 	    	throw new UnsupportedOperationException();
 	    }
+		dao.setLanguage(language);
 		return dao;
 	}
 }

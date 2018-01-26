@@ -6,6 +6,7 @@ import by.epam.bicycle.dao.DAOException;
 import by.epam.bicycle.dao.impl.RentDAO;
 import by.epam.bicycle.entity.Bicycle;
 import by.epam.bicycle.entity.Rent;
+import by.epam.bicycle.entity.RentalPoint;
 import by.epam.bicycle.entity.Tariff;
 import by.epam.bicycle.entity.User;
 import by.epam.bicycle.service.AbstractService;
@@ -16,11 +17,16 @@ public class RentService extends AbstractService<Rent>{
 	public RentService() {
 		super(Rent.class);
 	}
+	
+	public RentService(String language) {
+		super(Rent.class, language);
+	}
 
 	public void createNewRent(long userId, long bicycleId, long tariffId) throws ServiceException {
 		ConnectionPool pool = ConnectionPool.getInstance();
 		Connection connection = pool.getConnection();
-		RentDAO dao = new RentDAO(connection);
+		String language = getLanguage();
+		RentDAO dao = new RentDAO(connection, language);
 		
 		User user = new User(userId);
 		Bicycle bicycle = new Bicycle(bicycleId);

@@ -15,11 +15,16 @@ public class BicycleService extends AbstractService<Bicycle> {
 	public BicycleService() {
 		super(Bicycle.class);
 	}
+	
+	public BicycleService(String language) {
+		super(Bicycle.class, language);
+	}
 
 	public List<Bicycle> getActiveBicyclesByFilter(long rentalPointId, long bicycleTypeId, String firm, String model) throws ServiceException {
 		ConnectionPool pool = ConnectionPool.getInstance();
 		Connection connection = pool.getConnection();
-		BicycleDAO dao = new BicycleDAO(connection);
+		String language = getLanguage();
+		BicycleDAO dao = new BicycleDAO(connection, language);
 		try {
 			List<Bicycle> bicycles = dao.findActiveBicycleByFilter(rentalPointId, bicycleTypeId, firm, model);
 			return bicycles;

@@ -29,9 +29,13 @@ public class BicycleDAO extends AbstractDAO<Bicycle> {
 	public BicycleDAO() {
 		super(Bicycle.class, Bicycle.TABLE_NAME);
 	}
+	
+	public BicycleDAO(String language) {
+		super(Bicycle.class, Bicycle.TABLE_NAME, language);
+	}
 
-	public BicycleDAO(Connection connection) {
-		super(Bicycle.class, Bicycle.TABLE_NAME, connection);
+	public BicycleDAO(Connection connection, String language) {
+		super(Bicycle.class, Bicycle.TABLE_NAME, connection, language);
 	}
 	
 	public List<Bicycle> findAll() throws DAOException {

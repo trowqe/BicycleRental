@@ -16,8 +16,12 @@ public class TariffDAO extends AbstractDAO<Tariff>  {
 		super(Tariff.class, Tariff.TABLE_NAME);
 	}
 	
-	public TariffDAO(Connection connection) {
-		super(Tariff.class, Tariff.TABLE_NAME, connection);
+	public TariffDAO(String language) {
+		super(Tariff.class, Tariff.TABLE_NAME, language);
+	}
+	
+	public TariffDAO(Connection connection, String language) {
+		super(Tariff.class, Tariff.TABLE_NAME, connection, language);
 	}
 
 	public void create(Tariff entity) throws DAOException {

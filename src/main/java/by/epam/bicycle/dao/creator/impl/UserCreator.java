@@ -3,11 +3,17 @@ package by.epam.bicycle.dao.creator.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import by.epam.bicycle.dao.creator.EntityCreator;
+import by.epam.bicycle.dao.creator.AbstractCreator;
 import by.epam.bicycle.entity.Role;
 import by.epam.bicycle.entity.User;
 
-public class UserCreator implements EntityCreator<User> {
+public class UserCreator extends AbstractCreator<User> {
+	public UserCreator() {
+	}
+	
+	public UserCreator(String language) {
+		super(language);
+	}
 
 	public User execute(ResultSet resultSet) throws SQLException {
 		User user = new User();

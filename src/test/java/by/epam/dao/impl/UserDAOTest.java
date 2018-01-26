@@ -46,7 +46,7 @@ public class UserDAOTest {
 	public void shouldReturnNull() throws DAOException {
 		ConnectionPool pool = ConnectionPool.getInstance();
 		Connection connection = pool.getConnection();
-		UserDAO dao = new UserDAO(connection);
+		UserDAO dao = new UserDAO(connection, "ru");
 		
 		User expected = null;
 		User actual = null;

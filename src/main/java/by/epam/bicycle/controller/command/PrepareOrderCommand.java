@@ -3,6 +3,7 @@ package by.epam.bicycle.controller.command;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,7 +22,10 @@ public class PrepareOrderCommand implements ActionCommand {
 	public String execute(HttpServletRequest request) {
 		long bicycleId = Long.parseLong(request.getParameter(BICYCLE_ID_PARAM));
 		try {
-			BicycleService bicycleService = new BicycleService();
+			HttpSession session = request.getSession(true);
+			String language = (String) session.getAttribute("language");
+			
+			BicycleService bicycleService = new BicycleService(language);
 			Bicycle bicycle = bicycleService.findEntityById(bicycleId);
 			Long rentPointId = bicycle.getPoint().getId();
 			String orderRentPoint = bicycle.getPoint().getAddress();
@@ -32,7 +36,7 @@ public class PrepareOrderCommand implements ActionCommand {
 			request.setAttribute("orderBicycleModel", orderBicycleModel);
 			
 			Long bicycleTypeId = bicycle.getModel().getBicycleType().getId();
-			TariffService tariffService = new TariffService();
+			TariffService tariffService = new TariffService(language);
 			List<Tariff> tariffs = tariffService.getTarriffListByBicycleTypeId(bicycleTypeId);
 			request.setAttribute("tariffs", tariffs);
 			

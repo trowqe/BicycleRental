@@ -11,9 +11,13 @@ public class RentalPointDAO extends AbstractDAO<RentalPoint> {
 	public RentalPointDAO() {
 		super(RentalPoint.class, RentalPoint.TABLE_NAME);
 	}
+	
+	public RentalPointDAO(String language) {
+		super(RentalPoint.class, RentalPoint.TABLE_NAME, language);
+	}
 
-	public RentalPointDAO(Connection connection) {
-		super(RentalPoint.class, RentalPoint.TABLE_NAME, connection);
+	public RentalPointDAO(Connection connection, String language) {
+		super(RentalPoint.class, RentalPoint.TABLE_NAME, connection, language);
 	}
 
 	public void create(RentalPoint entity) throws DAOException {

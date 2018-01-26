@@ -31,7 +31,9 @@ public class EntityCreatorDirector {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <T extends Entity> EntityCreator<T> getCreator(Class<T> entity){
-		return (EntityCreator<T>) map.get(entity);
+	public <T extends Entity> EntityCreator<T> getCreator(Class<T> entity, String language){
+		AbstractCreator<T> creator = (AbstractCreator<T>) map.get(entity);
+		creator.setLanguage(language);
+		return creator;
 	}
 }

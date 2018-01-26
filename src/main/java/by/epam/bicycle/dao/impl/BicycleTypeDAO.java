@@ -12,8 +12,12 @@ public class BicycleTypeDAO extends AbstractDAO<BicycleType> {
 		super(BicycleType.class, BicycleType.TABLE_NAME);
 	}
 	
-	public BicycleTypeDAO(Connection connection) {
-		super(BicycleType.class, BicycleType.TABLE_NAME, connection);
+	public BicycleTypeDAO(String language) {
+		super(BicycleType.class, BicycleType.TABLE_NAME, language);
+	}
+	
+	public BicycleTypeDAO(Connection connection, String language) {
+		super(BicycleType.class, BicycleType.TABLE_NAME, connection, language);
 	}
 
 	public void create(BicycleType entity) throws DAOException {

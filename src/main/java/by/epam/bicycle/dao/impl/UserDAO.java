@@ -22,11 +22,14 @@ public class UserDAO extends AbstractDAO<User> {
 		super(User.class, User.TABLE_NAME);
 	}
 	
-	public UserDAO(Connection connection) {
-		super(User.class, User.TABLE_NAME, connection);
+	public UserDAO(String language) {
+		super(User.class, User.TABLE_NAME, language);
 	}
-
-
+	
+	public UserDAO(Connection connection, String language) {
+		super(User.class, User.TABLE_NAME, connection, language);
+	}
+	
 	public void create(User entity) throws DAOException {
 		throw new UnsupportedOperationException();
 	}

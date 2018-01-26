@@ -77,4 +77,5 @@ function clearBicycleFilter() {
 	document.getElementById("bicycletype").value = 0;
 	document.getElementById("firm").value = "";
 	document.getElementById("model").value = "";
+	document.getElementById("filterbikes").submit();
 }

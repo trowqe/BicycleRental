@@ -19,7 +19,7 @@ public class TariffDAOTest {
 	public void test() {
 		ConnectionPool pool = ConnectionPool.getInstance();
 		Connection connection = pool.getConnection();
-		TariffDAO dao = new TariffDAO(connection);
+		TariffDAO dao = new TariffDAO(connection, "ru");
 		try {
 			List<Tariff> list  = dao.findTariffsByBicycleTypeId(1l);
 			for (Tariff b : list) {

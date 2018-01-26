@@ -16,9 +16,13 @@ public class RentDAO extends AbstractDAO<Rent> {
 	public RentDAO() {
 		super(Rent.class, Rent.TABLE_NAME);
 	}
-
-	public RentDAO(Connection connection) {
-		super(Rent.class, Rent.TABLE_NAME, connection);
+	
+	public RentDAO(String language) {
+		super(Rent.class, Rent.TABLE_NAME, language);
+	}
+	
+	public RentDAO(Connection connection, String language) {
+		super(Rent.class, Rent.TABLE_NAME, connection, language);
 	}
 
 	public void create(Rent entity) throws DAOException {

@@ -22,7 +22,7 @@ public abstract class Entity implements Serializable, Identifiable {
 	public Entity(long id) {
 		this.id = id;
 	}
-
+	
 	public long getId() {
 		return id;
 	}
@@ -30,7 +30,7 @@ public abstract class Entity implements Serializable, Identifiable {
 	public void setId(long id) {
 		this.id = id;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -51,7 +51,5 @@ public abstract class Entity implements Serializable, Identifiable {
 		if (id != other.id)
 			return false;
 		return true;
-	}
-	
-	
+	}	
 }

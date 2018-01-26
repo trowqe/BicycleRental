@@ -19,7 +19,7 @@ public class BicycleDAOTest {
 	public void test() {
 		ConnectionPool pool = ConnectionPool.getInstance();
 		Connection connection = pool.getConnection();
-		BicycleDAO dao = new BicycleDAO(connection);
+		BicycleDAO dao = new BicycleDAO(connection, "ru");
 		try {
 			List<Bicycle> list  = dao.findActiveBicycleByFilter(2L, 1L, "", "");
 			for (Bicycle b : list) {

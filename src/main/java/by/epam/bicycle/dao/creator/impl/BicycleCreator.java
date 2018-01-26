@@ -3,6 +3,7 @@ package by.epam.bicycle.dao.creator.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import by.epam.bicycle.dao.creator.AbstractCreator;
 import by.epam.bicycle.dao.creator.EntityCreator;
 import by.epam.bicycle.dao.creator.EntityCreatorDirector;
 import by.epam.bicycle.entity.Bicycle;
@@ -10,7 +11,13 @@ import by.epam.bicycle.entity.BicycleModel;
 import by.epam.bicycle.entity.RentalPoint;
 
 
-public class BicycleCreator implements EntityCreator<Bicycle> {
+public class BicycleCreator extends AbstractCreator<Bicycle> {
+	public BicycleCreator() {
+	}
+	
+	public BicycleCreator(String language) {
+		super(language);
+	}
 
 	public Bicycle execute(ResultSet resultSet) throws SQLException {
 		Bicycle bicycle = new Bicycle();
@@ -20,12 +27,13 @@ public class BicycleCreator implements EntityCreator<Bicycle> {
 		
 		long rentalPointId = resultSet.getLong(Bicycle.RENTAL_POINT_ID_DB_FIELD);
 		EntityCreatorDirector creatorDirector = new EntityCreatorDirector();
-		EntityCreator<RentalPoint> creator = creatorDirector.getCreator(RentalPoint.class);
+		String language = getLanguage();
+		EntityCreator<RentalPoint> creator = creatorDirector.getCreator(RentalPoint.class, language);
 		RentalPoint rentalPoint = creator.execute(rentalPointId, resultSet);
 		bicycle.setPoint(rentalPoint);
 		
 		long bicycleModelId = resultSet.getLong(Bicycle.MODEL_ID_DB_FIELD);
-		EntityCreator<BicycleModel> creatorModel = creatorDirector.getCreator(BicycleModel.class);
+		EntityCreator<BicycleModel> creatorModel = creatorDirector.getCreator(BicycleModel.class, language);
 		BicycleModel bicycleModel = creatorModel.execute(bicycleModelId, resultSet);
 		bicycle.setModel(bicycleModel);
 				

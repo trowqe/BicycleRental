@@ -43,20 +43,21 @@ public class LoginCommand implements ActionCommand {
 
 				HttpSession session = request.getSession(true);
 				session.setAttribute("user", user);
+				String language = (String) session.getAttribute("language");
 
 				Role userRole = user.getRole();
 				logger.debug("userRole = " + userRole.getName());
 				if (userRole.isUser()) {
 					page = ConfigurationManager.getProperty("path.page.bicycles");
-					RentalPointService rentalPointService = new RentalPointService();
+					RentalPointService rentalPointService = new RentalPointService(language);
 					List<RentalPoint> rentalPoints = rentalPointService.findAll();
 					request.setAttribute("rentalPoints", rentalPoints);
 					
-					BicycleTypeService bicycleTypeService = new BicycleTypeService();
+					BicycleTypeService bicycleTypeService = new BicycleTypeService(language);
 					List<BicycleType> bicycleTypes = bicycleTypeService.findAll();
 					request.setAttribute("bicycleTypes", bicycleTypes);
 					
-					BicycleService bicycleService  = new BicycleService();
+					BicycleService bicycleService  = new BicycleService(language);
 					List<Bicycle> bicycles = bicycleService.getActiveBicyclesByFilter(-1, -1, "", "");
 					request.setAttribute("bicycles", bicycles);
 				} else {

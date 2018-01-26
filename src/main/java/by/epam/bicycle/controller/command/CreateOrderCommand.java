@@ -3,6 +3,7 @@ package by.epam.bicycle.controller.command;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,15 +34,18 @@ public class CreateOrderCommand implements ActionCommand {
 		logger.debug("bicycleId = " + bicycleId);
 		logger.debug("tariffId = " + tariffId);
 		try {
-			RentalPointService rentalPointService = new RentalPointService();
+			HttpSession session = request.getSession(true);
+			String language = (String) session.getAttribute("language");
+			
+			RentalPointService rentalPointService = new RentalPointService(language);
 			List<RentalPoint> rentalPoints = rentalPointService.findAll();
 			request.setAttribute("rentalPoints", rentalPoints);
 			
-			BicycleTypeService bicycleTypeService = new BicycleTypeService();
+			BicycleTypeService bicycleTypeService = new BicycleTypeService(language);
 			List<BicycleType> bicycleTypes = bicycleTypeService.findAll();
 			request.setAttribute("bicycleTypes", bicycleTypes);
 			
-			BicycleService bicycleService  = new BicycleService();
+			BicycleService bicycleService  = new BicycleService(language);
 			List<Bicycle> bicycles = bicycleService.getActiveBicyclesByFilter(-1, -1, "", "");
 			request.setAttribute("bicycles", bicycles);
 			

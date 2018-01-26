@@ -12,8 +12,12 @@ public class RoleDAO extends AbstractDAO<Role> {
 		super(Role.class, Role.TABLE_NAME);
 	}
 	
-	public RoleDAO(Connection connection) {
-		super(Role.class, Role.TABLE_NAME, connection);
+	public RoleDAO(String language) {
+		super(Role.class, Role.TABLE_NAME, language);
+	}
+	
+	public RoleDAO(Connection connection, String language) {
+		super(Role.class, Role.TABLE_NAME, connection, language);
 	}
 
 	public void create(Role entity) throws DAOException {

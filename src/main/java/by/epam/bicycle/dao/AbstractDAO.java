@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import by.epam.bicycle.config.ConfigurationManager;
 import by.epam.bicycle.dao.creator.EntityCreator;
 import by.epam.bicycle.dao.creator.EntityCreatorDirector;
 import by.epam.bicycle.entity.Entity;
@@ -16,19 +17,32 @@ import by.epam.bicycle.entity.Entity;
 public abstract class AbstractDAO<T extends Entity> implements EntityDAO<T> {
 	private final Class<T> entityClass; 
 	private final String tableName; 
+	private String language;
 	private WrapperConnection wrappedConnection;
 	
 	private final static String SELECT_ALL_ENTITIES = "select * from ";
 	private final static String SELECT_ENTITIE_BY_ID = " where id = ?";	
 	private final static String DELETE_ENTITIE_BY_ID = "delete from ? where id = ?";	
-
+	
 	public AbstractDAO(Class<T> entityClass, String tableName) {
 		this.entityClass = entityClass;
 		this.tableName = tableName;
+		this.language = ConfigurationManager.getProperty("language.default");
+	}
+	
+	public AbstractDAO(Class<T> entityClass, String tableName, String language) {
+		this.entityClass = entityClass;
+		this.tableName = tableName;
+		this.language = language;
 	}
 	
 	public AbstractDAO(Class<T> entityClass, String tableName, Connection connection) {
 		this(entityClass, tableName);
+		setWrappedConnection(new WrapperConnection(connection));
+	}
+	
+	public AbstractDAO(Class<T> entityClass, String tableName, Connection connection, String language) {
+		this(entityClass, tableName, language);
 		setWrappedConnection(new WrapperConnection(connection));
 	}
 
@@ -48,6 +62,14 @@ public abstract class AbstractDAO<T extends Entity> implements EntityDAO<T> {
 		return tableName;
 	}	
 	
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
 	public List<T> findAll() throws DAOException {
 		return findListOfEntities(SELECT_ALL_ENTITIES + tableName);
 	}
@@ -76,7 +98,7 @@ public abstract class AbstractDAO<T extends Entity> implements EntityDAO<T> {
 			
 			if (resultSet.next()) { 
 				EntityCreatorDirector creatorDirector = new EntityCreatorDirector();
-				EntityCreator<T> creator = creatorDirector.getCreator(entityClass);
+				EntityCreator<T> creator = creatorDirector.getCreator(entityClass, language);
 				entitie = creator.execute(resultSet);
 			}
 			
@@ -101,7 +123,7 @@ public abstract class AbstractDAO<T extends Entity> implements EntityDAO<T> {
 
 			if (resultSet.next()) { 
 				EntityCreatorDirector creatorDirector = new EntityCreatorDirector();
-				EntityCreator<T> creator = creatorDirector.getCreator(entityClass);
+				EntityCreator<T> creator = creatorDirector.getCreator(entityClass, language);
 				entitie = creator.execute(resultSet);
 			}
 			
@@ -125,7 +147,7 @@ public abstract class AbstractDAO<T extends Entity> implements EntityDAO<T> {
 			resultSet = statement.executeQuery();
 
 			EntityCreatorDirector creatorDirector = new EntityCreatorDirector();
-			EntityCreator<T> creator = creatorDirector.getCreator(entityClass);
+			EntityCreator<T> creator = creatorDirector.getCreator(entityClass, language);
 
 			while (resultSet.next()) {
 				T entitie = creator.execute(resultSet);

@@ -68,8 +68,8 @@ function validateOrderForm() {
 	}
 }
 
-function changeLocale(selectObject) {
-	console.log(selectObject.value)
+function changeLanguage() {
+	document.getElementById("langForm").submit();
 }
 
 function clearBicycleFilter() {

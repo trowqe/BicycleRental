@@ -25,6 +25,11 @@ public enum CommandEnum {
 		{
 			this.command = new CreateOrderCommand();
 		}
+	}, 
+	CHANGELANGUAGE {
+		{
+			this.command = new ChangeLanguageCommand();
+		}
 	};
 	ActionCommand command;
 

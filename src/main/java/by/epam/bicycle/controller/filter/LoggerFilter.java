@@ -39,6 +39,5 @@ public class LoggerFilter implements Filter {
 
 	public void destroy() {		
 	}
-
 	
 }

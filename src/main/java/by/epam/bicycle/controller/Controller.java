@@ -9,13 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import by.epam.bicycle.config.ConfigurationManager;
 import by.epam.bicycle.config.MessageManager;
 import by.epam.bicycle.controller.command.ActionCommand;
-import by.epam.bicycle.controller.command.LoginCommand;
 
 @WebServlet("/controller")
 public class Controller extends HttpServlet {

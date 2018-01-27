@@ -34,4 +34,18 @@ public class UserService extends AbstractService<User>{
 			pool.returnConnectionToPool(connection);
 		}
 	}
+	
+	public boolean isLoginUnique(String login) throws ServiceException {
+		ConnectionPool pool = ConnectionPool.getInstance();
+		Connection connection = pool.getConnection();
+		String language = getLanguage();
+		UserDAO dao = new UserDAO(connection, language);
+		try {
+			return dao.isLoginUnique(login);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		} finally {
+			pool.returnConnectionToPool(connection);
+		}
+	}
 }

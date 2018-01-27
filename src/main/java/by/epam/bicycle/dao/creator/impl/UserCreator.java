@@ -29,6 +29,7 @@ public class UserCreator extends AbstractCreator<User> {
 		user.setBlockDateTime(resultSet.getDate(User.BLOCK_DATETIME_DB_FIELD));
 		user.setLastEnterDateTime(resultSet.getDate(User.LAST_ENTER_DATETIME_DB_FIELD));
 		user.setBalance(resultSet.getBigDecimal(User.BALANCE_DB_FIELD));
+		user.setCreateDateTime(resultSet.getDate(User.CREATE_DATETIME_DB_FIELD));
 		
 		Role role = new Role();
 		role.setId(resultSet.getLong(User.ROLE_ID_DB_FIELD));

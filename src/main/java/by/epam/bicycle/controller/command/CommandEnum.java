@@ -30,6 +30,11 @@ public enum CommandEnum {
 		{
 			this.command = new ChangeLanguageCommand();
 		}
+	},
+	CREATEUSER {
+		{
+			this.command = new CreateUserCommand();
+		}
 	};
 	ActionCommand command;
 

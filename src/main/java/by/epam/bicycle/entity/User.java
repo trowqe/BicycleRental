@@ -25,6 +25,7 @@ public class User extends Entity {
 	public static final String LAST_ENTER_DATETIME_DB_FIELD = "last_enter_datetime";
 	public static final String STATUS_DB_FIELD = "status";
 	public static final String BLOCK_DATETIME_DB_FIELD = "block_datetime";
+	public static final String CREATE_DATETIME_DB_FIELD = "create_datetime";
 	public static final String BALANCE_DB_FIELD = "balance";
 	public static final String ROLE_ID_DB_FIELD = "role_id";
 	public static final String TABLE_NAME = "users";
@@ -53,6 +54,7 @@ public class User extends Entity {
 	private BigDecimal balance;
 	/** role in system (User or Admin) */
 	private Role role;	
+	private Date createDateTime;
 	
 	
 	public User() {
@@ -76,6 +78,17 @@ public class User extends Entity {
 		this.status = status;
 		this.blockDateTime = blockDateTime;
 		this.balance = balance;
+		this.role = role;
+	}
+
+	public User(String name, String surname, String patronymic, String mobilePhone, String email, String login, String password, Role role) {
+		this.name = name;
+		this.surname = surname;
+		this.patronymic = patronymic;
+		this.mobilePhone = mobilePhone;
+		this.email = email;
+		this.login = login;
+		this.password = password;
 		this.role = role;
 	}
 
@@ -125,6 +138,10 @@ public class User extends Entity {
 	
 	public Role getRole() {
 		return role;
+	}
+	
+	public Date getCreateDateTime() {
+		return createDateTime;
 	}
 	
 	public void setName(String name) {
@@ -188,7 +205,18 @@ public class User extends Entity {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-
+	
+	public void setCreateDateTime(Date createDateTime) {
+		this.createDateTime = createDateTime;
+	}
+	
+	public void setCreateDateTime(int year, int month, int day, int hours, int minutes) {
+		Calendar cal = Calendar.getInstance();
+		cal.set(year, month, day, hours, minutes);
+		Date date = cal.getTime();
+		this.createDateTime = date;
+	}
+	
 	@Override
 	public int hashCode() {
 		return super.hashCode();
@@ -270,7 +298,6 @@ public class User extends Entity {
 				+ ", lastEnterDateTime=" + lastEnterDateTime + ", status=" + status + ", blockDateTime=" + blockDateTime
 				+ ", balance=" + balance + ", role=" + role + "]";
 	}
-	
 	
 	
 }

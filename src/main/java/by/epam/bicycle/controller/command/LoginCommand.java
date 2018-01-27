@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 import by.epam.bicycle.config.ConfigurationManager;
 import by.epam.bicycle.config.MessageManager;
+import by.epam.bicycle.controller.CommandException;
 import by.epam.bicycle.entity.Bicycle;
 import by.epam.bicycle.entity.BicycleType;
 import by.epam.bicycle.entity.RentalPoint;
@@ -27,7 +28,7 @@ public class LoginCommand implements ActionCommand {
 	private static final String PARAM_NAME_LOGIN = "login";
 	private static final String PARAM_NAME_PASSWORD = "password";
 
-	public String execute(HttpServletRequest request) {
+	public String execute(HttpServletRequest request) throws CommandException {
 		String page = null;
 		String login = request.getParameter(PARAM_NAME_LOGIN);
 		String pass = request.getParameter(PARAM_NAME_PASSWORD);
@@ -37,13 +38,16 @@ public class LoginCommand implements ActionCommand {
 		try {
 			UserService service = new UserService();
 			user = service.getUserByLoginAndPassword(login, pass);
-
-			if (user != null) {
-				logger.debug("user = " + user.getId() + " | " + user.getName());
-
-				HttpSession session = request.getSession(true);
+			HttpSession session = request.getSession(true);
+			String language = (String) session.getAttribute("language");
+			
+			
+			if (user == null) {
+				String message = MessageManager.getProperty(language, "message.loginerror");
+				throw new CommandException(message);
+			} else {
+				logger.debug("user = " + user.getId() + " | " + user.getName());			
 				session.setAttribute("user", user);
-				String language = (String) session.getAttribute("language");
 
 				Role userRole = user.getRole();
 				logger.debug("userRole = " + userRole.getName());
@@ -65,13 +69,9 @@ public class LoginCommand implements ActionCommand {
 				}
 			}
 		} catch (ServiceException e) {
-			logger.error(e.getMessage(), e);
-			request.setAttribute("errorLoginPassMessage", MessageManager.getProperty("message.loginerror"));
-			page = ConfigurationManager.getProperty("path.page.login");
-		}
-
+			throw new CommandException(e);
+		} 
 		return page;
-
 	}
 
 }

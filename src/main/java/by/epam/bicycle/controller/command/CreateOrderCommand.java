@@ -33,6 +33,7 @@ public class CreateOrderCommand implements ActionCommand {
 		logger.debug("userId = " + userId);
 		logger.debug("bicycleId = " + bicycleId);
 		logger.debug("tariffId = " + tariffId);
+		
 		try {
 			HttpSession session = request.getSession(true);
 			String language = (String) session.getAttribute("language");
@@ -54,6 +55,7 @@ public class CreateOrderCommand implements ActionCommand {
 		} catch (ServiceException e) {
 			logger.error(e.getMessage(), e);	
 		}		
+		
 		return ConfigurationManager.getProperty("path.page.bicycles");
 	}
 

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import by.epam.bicycle.dao.ConnectionPool;
 import by.epam.bicycle.dao.DAOException;
 import by.epam.bicycle.dao.impl.UserDAO;
-import by.epam.bicycle.entity.Tariff;
 import by.epam.bicycle.entity.User;
 import by.epam.bicycle.service.AbstractService;
 import by.epam.bicycle.service.ServiceException;

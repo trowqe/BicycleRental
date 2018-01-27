@@ -6,7 +6,6 @@ import by.epam.bicycle.dao.DAOException;
 import by.epam.bicycle.dao.impl.RentDAO;
 import by.epam.bicycle.entity.Bicycle;
 import by.epam.bicycle.entity.Rent;
-import by.epam.bicycle.entity.RentalPoint;
 import by.epam.bicycle.entity.Tariff;
 import by.epam.bicycle.entity.User;
 import by.epam.bicycle.service.AbstractService;

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>  
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@taglib prefix="m" uri="/WEB-INF/tld/alertbox.tld"%>
+ 
 <fmt:setLocale value="${sessionScope.language}" />
 <fmt:setBundle basename="localization.data" />
 <!DOCTYPE html>
@@ -14,6 +16,7 @@
 	<c:import url="fragment\header.jsp"/>
 	
 	<main>
+		<m:alertbox/>
 		<section>
 			<div class="content-single animate grey">
 				<div class="tab">
@@ -32,8 +35,7 @@
 					<div class="container center">
 						<button type="submit" class="enterbtn"><fmt:message key="login.button.login"/></button>
     				</div>
-    				<div id="loginmsg" class="container"></div>
-				</form>
+   				</form>
 
 				<form name="registrationForm" id="registrationForm" method="POST" action="controller" class="tabcontent"  onsubmit="return validateRegistrationForm()">
 					<div class="container">
@@ -58,8 +60,7 @@
 					<div class="container center">
 						<button type="submit" class="enterbtn"><fmt:message key="login.button.signup"/></button>
     				</div>
-    				<div id="registermsg" class="container"></div>
-				</form>					
+    			</form>					
 			</div>
 		</section>
 	</main>

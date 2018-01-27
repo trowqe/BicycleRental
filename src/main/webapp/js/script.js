@@ -79,3 +79,25 @@ function clearBicycleFilter() {
 	document.getElementById("model").value = "";
 	document.getElementById("filterbikes").submit();
 }
+
+function closeAlert() {
+	document.getElementById("alert").style.display='none';
+}
+
+function closeAlertTimeout() {
+	setTimeout(function(){fadeOut("alert"); closeAlert();}, 3000);	
+}
+
+function fadeOut(element) {
+    var fadeTarget = document.getElementById(element);
+    var fadeEffect = setInterval(function () {
+        if (!fadeTarget.style.opacity) {
+            fadeTarget.style.opacity = 1;
+        }
+        if (fadeTarget.style.opacity < 0.1) {
+            clearInterval(fadeEffect);
+        } else {
+            fadeTarget.style.opacity -= 0.1;
+        }
+    }, 100);
+}

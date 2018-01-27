@@ -6,7 +6,6 @@ import java.util.List;
 import by.epam.bicycle.dao.ConnectionPool;
 import by.epam.bicycle.dao.DAOException;
 import by.epam.bicycle.dao.impl.TariffDAO;
-import by.epam.bicycle.entity.Rent;
 import by.epam.bicycle.entity.Tariff;
 import by.epam.bicycle.service.AbstractService;
 import by.epam.bicycle.service.ServiceException;

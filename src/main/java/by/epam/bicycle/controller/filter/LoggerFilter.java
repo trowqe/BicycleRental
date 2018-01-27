@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,11 +24,12 @@ public class LoggerFilter implements Filter {
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-//		Enumeration<String> headerNames = request.getHeaderNames();
-//		while(headerNames.hasMoreElements()) {
-//		  String headerName = headerNames.nextElement();
-//		  logger.debug("Header Name - " + headerName + ", Value - " + request.getHeader(headerName));
-//		}
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		Enumeration<String> headerNames = httpRequest.getHeaderNames();
+		while(headerNames.hasMoreElements()) {
+		  String headerName = headerNames.nextElement();
+		  logger.debug("Header Name - " + headerName + ", Value - " + httpRequest.getHeader(headerName));
+		}
 		
 		Enumeration<String> params = request.getParameterNames();
 		while(params.hasMoreElements()) {

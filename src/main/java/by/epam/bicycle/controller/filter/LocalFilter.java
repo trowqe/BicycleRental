@@ -1,8 +1,6 @@
 package by.epam.bicycle.controller.filter;
 
 import java.io.IOException;
-import java.util.Locale;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -28,17 +26,12 @@ public class LocalFilter implements Filter {
 		HttpServletRequest httpReq = (HttpServletRequest) request;
 		HttpSession session = httpReq.getSession(true);
 		
-		//set default locale
 		if (session.getAttribute("language") == null)  {
 			String language = ConfigurationManager.getProperty("language.default");
 			session.setAttribute("language", language);
-		}
-		
-		//set locale from params		
-		
+		}		
 		
 		chain.doFilter(request, response);
-		
 	}
 	
 

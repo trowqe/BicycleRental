@@ -1,5 +1,6 @@
 package by.epam.bicycle.service.impl;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import by.epam.bicycle.dao.ConnectionPool;
 import by.epam.bicycle.dao.DAOException;
@@ -40,8 +41,24 @@ public class UserService extends AbstractService<User>{
 		Connection connection = pool.getConnection();
 		String language = getLanguage();
 		UserDAO dao = new UserDAO(connection, language);
+		boolean result = false;
 		try {
-			return dao.isLoginUnique(login);
+			result = dao.isLoginUnique(login);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		} finally {
+			pool.returnConnectionToPool(connection);
+		}
+		return result;
+	}
+	
+	public void updateBalance(long id, BigDecimal balance) throws ServiceException {
+		ConnectionPool pool = ConnectionPool.getInstance();
+		Connection connection = pool.getConnection();
+		String language = getLanguage();
+		UserDAO dao = new UserDAO(connection, language);
+		try {
+			dao.updateBalance(id, balance);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		} finally {

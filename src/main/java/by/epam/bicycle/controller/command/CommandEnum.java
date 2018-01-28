@@ -40,6 +40,16 @@ public enum CommandEnum {
 		{
 			this.command = new RentsCommand();
 		}
+	},
+	RETURNBICYCLE {
+		{
+			this.command = new ReturnBicycleCommand();
+		}
+	},
+	CLOSERENT {
+		{
+			this.command = new CloseRentCommand();
+		}
 	};
 	ActionCommand command;
 

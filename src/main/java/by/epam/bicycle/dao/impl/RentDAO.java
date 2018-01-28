@@ -20,6 +20,13 @@ public class RentDAO extends AbstractDAO<Rent> {
 			+ " LEFT JOIN tariffs as t ON r.tariff_id = t.id"
 			+ " WHERE r.user_id = ? "
 			+ " ORDER BY r.datetime_create desc";
+	private static final String SQL_SELECT_RENT_BY_ID = "SELECT r.*, m.*, rp.*, t.*, b.*, bt.* FROM rents as r " 
+			+ " LEFT JOIN bicycles as b ON r.bicycle_id = b.id LEFT JOIN bicycle_models as m ON b.bicycle_model_id = m.id "
+			+ " LEFT JOIN rental_points as rp ON b.rental_point_id = rp.id"
+			+ " LEFT JOIN bicycle_types as bt ON m.bicycle_type_id = bt.id"
+			+ " LEFT JOIN tariffs as t ON r.tariff_id = t.id"
+			+ " WHERE r.id = ? ";
+	private static final String SQL_UPDATE_RENT_BY_ID = "UPDATE rents SET datetime_finish=?, amount=? WHERE id=?";
 
 	public RentDAO() {
 		super(Rent.class, Rent.TABLE_NAME);
@@ -53,7 +60,12 @@ public class RentDAO extends AbstractDAO<Rent> {
 	}
 
 	public void updateById(long id, Rent entity) throws DAOException {
-		throw new UnsupportedOperationException();
+		executeUpdateEntitie(SQL_UPDATE_RENT_BY_ID, entity.getFinishDateTime(), entity.getAmount(), id);
+	}
+	
+	public Rent findEntityById(long id) throws DAOException {
+		return findSingleEntitie(SQL_SELECT_RENT_BY_ID, id);
+		
 	}
 
 	public List<Rent> getRentsByUserId(long userId) throws DAOException {

@@ -12,6 +12,10 @@ function createOrder(selectObject) {
 	window.location="controller?command=prepareorder&bicycleid=" + bicycleId;
 }
 
+function returnBicycle(rentid) {
+	window.location="controller?command=returnbicycle&rentid=" + rentid;
+}
+
 function openTab(evt, tabName) {
     var i, tabcontent, tablinks;
 

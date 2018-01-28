@@ -40,15 +40,13 @@
 									<c:otherwise>
 										<fmt:formatDate type = "both" value = "${elem.getFinishDateTime()}" />
 									</c:otherwise>
-								</c:choose>
-								
-								
+								</c:choose>								
 								</td>
 								<td>${elem.getBicycle().getPoint().getAddress()}</td>
 								<td class="center">
 								<c:choose>
 									<c:when test="${elem.getFinishDateTime() == null}">
-										<button><fmt:message key="rents.button.returnbike"/></button>
+										<button onclick="returnBicycle(${elem.getId()})"><fmt:message key="rents.button.returnbike"/></button>
 									</c:when>
 									<c:otherwise>
 										${elem.getAmount()}

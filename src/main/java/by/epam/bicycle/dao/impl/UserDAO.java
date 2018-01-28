@@ -1,5 +1,6 @@
 package by.epam.bicycle.dao.impl;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,6 +28,7 @@ public class UserDAO extends AbstractDAO<User> {
 			+ "LEFT JOIN roles r ON u.role_id = r.id WHERE u.login = ?";
 	public static final String SQL_INSERT_NEW_USER = "INSERT INTO users(name, surname, patronymic, mobile_phone,"
 			+ "email, login, password, status, role_id, create_datetime) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	public static final String SQL_UPDATE_USER_SET_BALANCE = "UPDATE users SET balance=? WHERE id=?";
 
 	public UserDAO() {
 		super(User.class, User.TABLE_NAME);
@@ -87,5 +89,9 @@ public class UserDAO extends AbstractDAO<User> {
 		User user = findSingleEntitie(SQL_SELECT_USER_BY_LOGIN, login);
 		return (user == null);		
 	}
-
+	
+	public void updateBalance(long id, BigDecimal balance) throws DAOException {
+		executeUpdateEntitie(SQL_UPDATE_USER_SET_BALANCE, balance, id);
+	}
+	
 }

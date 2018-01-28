@@ -5,21 +5,18 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import by.epam.bicycle.config.ConfigurationManager;
+import by.epam.bicycle.controller.CommandException;
 import by.epam.bicycle.entity.Bicycle;
 import by.epam.bicycle.entity.Tariff;
 import by.epam.bicycle.service.ServiceException;
 import by.epam.bicycle.service.impl.BicycleService;
 import by.epam.bicycle.service.impl.TariffService;
 
-public class PrepareOrderCommand implements ActionCommand {
+public class PrepareOrderCommand implements ActionCommand  {
 	private static final String BICYCLE_ID_PARAM = "bicycleid";
-	private static Logger logger = LogManager.getLogger(PrepareOrderCommand.class);
 		
-	public String execute(HttpServletRequest request) {
+	public String execute(HttpServletRequest request) throws CommandException {
 		long bicycleId = Long.parseLong(request.getParameter(BICYCLE_ID_PARAM));
 		try {
 			HttpSession session = request.getSession(true);
@@ -30,6 +27,7 @@ public class PrepareOrderCommand implements ActionCommand {
 			Long rentPointId = bicycle.getPoint().getId();
 			String orderRentPoint = bicycle.getPoint().getAddress();
 			String orderBicycleModel =  bicycle.getModel().getFirm() + " " + bicycle.getModel().getModel();
+			
 			request.setAttribute("orderRentPointId", rentPointId);
 			request.setAttribute("orderBicycleId", bicycle.getId());
 			request.setAttribute("orderRentPoint", orderRentPoint);
@@ -41,9 +39,8 @@ public class PrepareOrderCommand implements ActionCommand {
 			request.setAttribute("tariffs", tariffs);
 			
 		} catch (ServiceException e) {
-			logger.error(e.getMessage(), e);
+			throw new CommandException(e);
 		}
-		
 		
 		return ConfigurationManager.getProperty("path.page.prepareorder");
 	}

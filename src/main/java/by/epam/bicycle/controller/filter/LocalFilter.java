@@ -11,11 +11,14 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.epam.bicycle.config.ConfigurationManager;
 
 @WebFilter(urlPatterns = { "/*" })
 public class LocalFilter implements Filter {
-
+	private static Logger logger = LogManager.getLogger(LocalFilter.class);
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 	}
@@ -29,8 +32,9 @@ public class LocalFilter implements Filter {
 		if (session.getAttribute("language") == null)  {
 			String language = ConfigurationManager.getProperty("language.default");
 			session.setAttribute("language", language);
-		}		
-		
+			logger.debug("language = " + language);
+		}	
+				
 		chain.doFilter(request, response);
 	}
 	

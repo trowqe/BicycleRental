@@ -3,4 +3,5 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/normalize.css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/font-awesome.min.css" />
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/script.js"></script>

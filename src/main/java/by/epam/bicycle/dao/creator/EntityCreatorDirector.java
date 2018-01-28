@@ -6,6 +6,7 @@ import java.util.Map;
 import by.epam.bicycle.dao.creator.impl.BicycleCreator;
 import by.epam.bicycle.dao.creator.impl.BicycleModelCreator;
 import by.epam.bicycle.dao.creator.impl.BicycleTypeCreator;
+import by.epam.bicycle.dao.creator.impl.RentCreator;
 import by.epam.bicycle.dao.creator.impl.RentalPointCreator;
 import by.epam.bicycle.dao.creator.impl.TariffCreator;
 import by.epam.bicycle.dao.creator.impl.UserCreator;
@@ -13,6 +14,7 @@ import by.epam.bicycle.entity.Bicycle;
 import by.epam.bicycle.entity.BicycleModel;
 import by.epam.bicycle.entity.BicycleType;
 import by.epam.bicycle.entity.Entity;
+import by.epam.bicycle.entity.Rent;
 import by.epam.bicycle.entity.RentalPoint;
 import by.epam.bicycle.entity.User;
 import by.epam.bicycle.entity.Tariff;
@@ -28,6 +30,7 @@ public class EntityCreatorDirector {
 		map.put(Bicycle.class, new BicycleCreator());
 		map.put(BicycleModel.class, new BicycleModelCreator());
 		map.put(Tariff.class, new TariffCreator());
+		map.put(Rent.class, new RentCreator());
 	}
 	
 	@SuppressWarnings("unchecked")

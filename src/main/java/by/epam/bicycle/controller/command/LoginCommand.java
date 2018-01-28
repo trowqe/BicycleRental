@@ -27,7 +27,24 @@ public class LoginCommand implements ActionCommand {
 	
 	private static final String PARAM_NAME_LOGIN = "login";
 	private static final String PARAM_NAME_PASSWORD = "password";
-
+	
+	private void preloadBicyclePage(HttpServletRequest request) throws ServiceException {
+		HttpSession session = request.getSession(true);
+		String language = (String) session.getAttribute("language");
+		
+		RentalPointService rentalPointService = new RentalPointService(language);
+		List<RentalPoint> rentalPoints = rentalPointService.findAll();
+		request.setAttribute("rentalPoints", rentalPoints);
+		
+		BicycleTypeService bicycleTypeService = new BicycleTypeService(language);
+		List<BicycleType> bicycleTypes = bicycleTypeService.findAll();
+		request.setAttribute("bicycleTypes", bicycleTypes);
+		
+		BicycleService bicycleService  = new BicycleService(language);
+		List<Bicycle> bicycles = bicycleService.getActiveBicyclesByFilter(-1, -1, "", "");
+		request.setAttribute("bicycles", bicycles);
+	}
+	
 	public String execute(HttpServletRequest request) throws CommandException {
 		String page = null;
 		String login = request.getParameter(PARAM_NAME_LOGIN);
@@ -41,29 +58,25 @@ public class LoginCommand implements ActionCommand {
 			HttpSession session = request.getSession(true);
 			String language = (String) session.getAttribute("language");
 			
-			
 			if (user == null) {
 				String message = MessageManager.getProperty(language, "message.loginerror");
 				throw new CommandException(message);
 			} else {
 				logger.debug("user = " + user.getId() + " | " + user.getName());			
+				
+				if (user.isBlocked()) {
+					String message = MessageManager.getProperty(language, "message.userblocked");
+					throw new CommandException(message);
+				}
+				
 				session.setAttribute("user", user);
 
 				Role userRole = user.getRole();
 				logger.debug("userRole = " + userRole.getName());
+				
 				if (userRole.isUser()) {
 					page = ConfigurationManager.getProperty("path.page.bicycles");
-					RentalPointService rentalPointService = new RentalPointService(language);
-					List<RentalPoint> rentalPoints = rentalPointService.findAll();
-					request.setAttribute("rentalPoints", rentalPoints);
-					
-					BicycleTypeService bicycleTypeService = new BicycleTypeService(language);
-					List<BicycleType> bicycleTypes = bicycleTypeService.findAll();
-					request.setAttribute("bicycleTypes", bicycleTypes);
-					
-					BicycleService bicycleService  = new BicycleService(language);
-					List<Bicycle> bicycles = bicycleService.getActiveBicyclesByFilter(-1, -1, "", "");
-					request.setAttribute("bicycles", bicycles);
+					preloadBicyclePage(request);				
 				} else {
 					page = ConfigurationManager.getProperty("path.page.main_admin");
 				}

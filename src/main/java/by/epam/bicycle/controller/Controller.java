@@ -47,6 +47,7 @@ public class Controller extends HttpServlet {
 			} 
 			
 		} catch (CommandException e) {
+			e.printStackTrace();
 			logger.error(e);
 			HttpSession session = request.getSession(true);	
 			session.setAttribute("alert", e);

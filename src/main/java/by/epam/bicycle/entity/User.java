@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
+import by.epam.bicycle.config.ConfigurationManager;
+
 /**
  * An entity class that contains information about user.
  *   
@@ -215,6 +217,16 @@ public class User extends Entity {
 		cal.set(year, month, day, hours, minutes);
 		Date date = cal.getTime();
 		this.createDateTime = date;
+	}
+	
+	public boolean isBlocked() {
+		short blockedStatus = Short.parseShort(ConfigurationManager.getProperty("user_status.blocked"));
+		return (status == blockedStatus);
+	}
+	
+	public boolean isActive() {
+		short activeStatus = Short.parseShort(ConfigurationManager.getProperty("user_status.active"));
+		return (status == activeStatus);
 	}
 	
 	@Override

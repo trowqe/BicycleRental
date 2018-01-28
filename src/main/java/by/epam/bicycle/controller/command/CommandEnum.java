@@ -35,6 +35,11 @@ public enum CommandEnum {
 		{
 			this.command = new CreateUserCommand();
 		}
+	},
+	RENTS {
+		{
+			this.command = new RentsCommand();
+		}
 	};
 	ActionCommand command;
 

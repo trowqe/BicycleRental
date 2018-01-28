@@ -1,6 +1,7 @@
 package by.epam.bicycle.entity;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -19,7 +20,7 @@ public class Rent extends Entity {
 
 	public static final String RENT_ID_DB_FIELD = "id";
 	public static final String CREATE_DATETIME_DB_FIELD = "datetime_create";
-	public static final String PLAN_DATETIME_FINISH_DB_FIELD = "datetime_finish";
+	public static final String FINISH_DATETIME_DB_FIELD = "datetime_finish";
 	public static final String AMOUNT_DB_FIELD = "amount";
 	public static final String USER_ID_DB_FIELD = "user_id";
 	public static final String BICYCLE_ID_DB_FIELD = "bicycle_id";
@@ -66,6 +67,15 @@ public class Rent extends Entity {
 	
 	public Date getFinishDateTime() {
 		return finishDateTime;
+	}
+	
+	public Date getPlanFinishDateTime() {
+		Calendar cal = Calendar.getInstance(); 
+		cal.setTime(createDateTime);
+		float tariffTime = tariff.getRentalTime();
+		int time = (int) (60 * tariffTime);
+		cal.add(Calendar.MINUTE, time);		
+		return cal.getTime();
 	}
 			
 	public BigDecimal getAmount() {

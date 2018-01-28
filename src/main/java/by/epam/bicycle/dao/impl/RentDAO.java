@@ -2,6 +2,7 @@ package by.epam.bicycle.dao.impl;
 
 import java.sql.Connection;
 import java.util.Date;
+import java.util.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,15 +13,22 @@ import by.epam.bicycle.entity.Rent;
 
 public class RentDAO extends AbstractDAO<Rent> {
 	private static final String SQL_INSERT_NEW_RENT = "INSERT INTO RENTS(datetime_create, user_id, bicycle_id, tariff_id) VALUES(?, ?, ?, ?)";
+	private static final String SQL_SELECT_RENTS_BY_USER_ID = "SELECT r.*, m.*, rp.*, t.*, b.*, bt.* FROM rents as r " 
+			+ " LEFT JOIN bicycles as b ON r.bicycle_id = b.id LEFT JOIN bicycle_models as m ON b.bicycle_model_id = m.id "
+			+ " LEFT JOIN rental_points as rp ON b.rental_point_id = rp.id"
+			+ " LEFT JOIN bicycle_types as bt ON m.bicycle_type_id = bt.id"
+			+ " LEFT JOIN tariffs as t ON r.tariff_id = t.id"
+			+ " WHERE r.user_id = ? "
+			+ " ORDER BY r.datetime_create desc";
 
 	public RentDAO() {
 		super(Rent.class, Rent.TABLE_NAME);
 	}
-	
+
 	public RentDAO(String language) {
 		super(Rent.class, Rent.TABLE_NAME, language);
 	}
-	
+
 	public RentDAO(Connection connection, String language) {
 		super(Rent.class, Rent.TABLE_NAME, connection, language);
 	}
@@ -46,6 +54,10 @@ public class RentDAO extends AbstractDAO<Rent> {
 
 	public void updateById(long id, Rent entity) throws DAOException {
 		throw new UnsupportedOperationException();
+	}
+
+	public List<Rent> getRentsByUserId(long userId) throws DAOException {
+		return findListOfEntities(SQL_SELECT_RENTS_BY_USER_ID, userId);
 	}
 
 }

@@ -45,6 +45,16 @@ public class LoginCommand implements ActionCommand {
 		request.setAttribute("bicycles", bicycles);
 	}
 	
+	public void preloadUsersPage(HttpServletRequest request) throws ServiceException {
+		HttpSession session = request.getSession(true);
+		String language = (String) session.getAttribute("language");
+	
+		UserService userService = new UserService(language);
+		List<User> users = userService.findAllUsers();
+		logger.debug("users = " + users);
+		request.setAttribute("users", users);
+	}
+	
 	public String execute(HttpServletRequest request) throws CommandException {
 		String page = null;
 		String login = request.getParameter(PARAM_NAME_LOGIN);
@@ -78,7 +88,8 @@ public class LoginCommand implements ActionCommand {
 					page = ConfigurationManager.getProperty("path.page.bicycles");
 					preloadBicyclePage(request);				
 				} else {
-					page = ConfigurationManager.getProperty("path.page.main_admin");
+					page = ConfigurationManager.getProperty("path.page.users");
+					preloadUsersPage(request);
 				}
 			}
 		} catch (ServiceException e) {

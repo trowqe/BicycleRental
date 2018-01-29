@@ -105,3 +105,33 @@ function fadeOut(element) {
         }
     }, 100);
 }
+
+
+function setChecked(obj, id) {
+	list= document.getElementById("users").getElementsByTagName("tr");
+	for (var i=0; i< list.length; ++i)  {
+		list[i].classList.remove("checked");
+	}
+	obj.classList.add("checked");
+	document.getElementById("user"+id).checked = true;
+}
+
+function blockUser() {
+	var radios = document.getElementsByName('user');
+	for (var i = 0, length = radios.length; i < length; i++) {
+		if (radios[i].checked) {
+			window.location="controller?command=updateuserstatus&userid="+radios[i].value+"&status=block";
+			break;
+		}
+	}
+}
+
+function unblockUser() {
+	var radios = document.getElementsByName('user');
+	for (var i = 0, length = radios.length; i < length; i++) {
+		if (radios[i].checked) {
+			window.location="controller?command=updateuserstatus&userid="+radios[i].value+"&status=unblock";
+			break;
+		}
+	}
+}

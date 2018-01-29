@@ -2,6 +2,8 @@ package by.epam.bicycle.service.impl;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
+import java.util.List;
+
 import by.epam.bicycle.dao.ConnectionPool;
 import by.epam.bicycle.dao.DAOException;
 import by.epam.bicycle.dao.impl.UserDAO;
@@ -64,5 +66,35 @@ public class UserService extends AbstractService<User>{
 		} finally {
 			pool.returnConnectionToPool(connection);
 		}
+	}
+	
+	public void updateStatus(long id, short status) throws ServiceException {
+		ConnectionPool pool = ConnectionPool.getInstance();
+		Connection connection = pool.getConnection();
+		String language = getLanguage();
+		UserDAO dao = new UserDAO(connection, language);
+		try {
+			dao.updateStatus(id, status);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		} finally {
+			pool.returnConnectionToPool(connection);
+		}
+	}
+	
+	public List<User> findAllUsers() throws ServiceException {
+		ConnectionPool pool = ConnectionPool.getInstance();
+		Connection connection = pool.getConnection();
+		String language = getLanguage();
+		UserDAO dao = new UserDAO(connection, language);
+		List<User> users = null;
+		try {
+			users = dao.findAllUsers();
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		} finally {
+			pool.returnConnectionToPool(connection);
+		}
+		return users;
 	}
 }

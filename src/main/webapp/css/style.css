@@ -534,3 +534,25 @@ table th {
     color: white;
 	font-weight: normal;
 }
+
+table td {
+	cursor: pointer;
+}
+
+table tr.checked {
+	background-color: #ddd;
+}
+
+.subheader {
+	background-color: #edebea;
+	color: #353541;
+}
+
+.subheader .topnav li a { 
+    color: #353541;
+    padding: 10px 10px;    
+}
+
+.subheader .topnav li a:hover:not(.active):not(.logo):not(.info-li) {
+    background-color: #CCCCCC ;
+} 

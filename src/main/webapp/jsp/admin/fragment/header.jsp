@@ -12,9 +12,7 @@
 					<img src="img/bike.png" height="70" class="logo"/>
 				</a>
 			</li>
-			<li><a href="controller?command=filterbicycles" class="active"><fmt:message key="user.header.bicycles"/></a></li>
-			<!-- <li><a href="controller?command=rentalpoints"><fmt:message key="user.header.rentalpoints"/></a></li>
-			<li><a href="controller?command=prices"><fmt:message key="user.header.prices"/></a></li>-->	
+			<li><a href="controller?command=users" class="active"><fmt:message key="admin.header.users"/></a></li>
 			<li class="right dropdown">
 				<a href="javascript:void(0)" class="dropbtn">
 					<span class="user-name">${sessionScope.user.getName()}</span> 
@@ -24,9 +22,6 @@
 					</span>
 				</a>
 				<div class="dropdown-content"> 
-					<c:set var="userBalance" scope="page" value="${sessionScope.user.getBalance()}"/>
-					<a class="info-li divider" href="javascript:void(0)"><fmt:message key="user.header.balance"/> <b class="${userBalance < 0 ? 'red' : ''}">${userBalance == null ? '0.00' : userBalance} <fmt:message key="user.header.currency"/></b></a>
-					<a class="divider" href="controller?command=rents"><fmt:message key="user.header.rents"/></a>
 					<a href="javascript:logout()"><fmt:message key="common.button.exit"/></a>
 				</div>	
 			</li>									

@@ -5,6 +5,10 @@ import java.util.ResourceBundle;
 public class ConfigurationManager {
 	private final static ResourceBundle resourceBundle = ResourceBundle.getBundle("config");
 	
+	public static final String ROLE_USER = "role.user";
+	public static final String USER_STATUS_ACTIVE = "user_status.active";
+	public static final String USER_STATUS_BLOCKED = "user_status.blocked";
+	
 	private ConfigurationManager() { } 
 	
 	public static String getProperty(String key) {

@@ -5,33 +5,34 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import by.epam.bicycle.config.ConfigurationManager;
+import by.epam.bicycle.config.SessionAttributes;
 import by.epam.bicycle.controller.CommandException;
 import by.epam.bicycle.controller.command.ActionCommand;
+import by.epam.bicycle.controller.response.CommandResponse;
+import by.epam.bicycle.controller.response.impl.ForwardResponse;
 import by.epam.bicycle.entity.User;
 import by.epam.bicycle.service.ServiceException;
 import by.epam.bicycle.service.impl.UserService;
 
 public class UsersCommand implements ActionCommand {
-	private static Logger logger = LogManager.getLogger(UsersCommand.class);
+	private final static String USERS_ATTRIBUTE = "users";
 	
 	@Override
-	public String execute(HttpServletRequest request) throws CommandException {
+	public CommandResponse execute(HttpServletRequest request) throws CommandException {
 		HttpSession session = request.getSession(true);
-		String language = (String) session.getAttribute("language");
+		String language = (String) session.getAttribute(SessionAttributes.LANGUAGE);
 		
 		try {
 			UserService userService = new UserService(language);
 			List<User> users = userService.findAllUsers();
-			logger.debug("users = " + users);
-			request.setAttribute("users", users);
+	
+			request.setAttribute(USERS_ATTRIBUTE, users);
 		} catch (ServiceException e) {
 			throw new CommandException(e);
 		}
-		return ConfigurationManager.getProperty("path.page.users");
+		
+		session.setAttribute(SessionAttributes.PAGE, SessionAttributes.USERS_PAGE);
+		return new ForwardResponse(CommandResponse.USERS_PAGE);
 	}
 
 }

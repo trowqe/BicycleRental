@@ -8,7 +8,7 @@
 <nav class="content">
 	<ul class="topnav">
 		<li>
-			<a href="index.html" class="logo"> 
+			<a href="index.jsp" class="logo"> 
 				<img src="img/bike.png" height="70" class="logo" />
 			</a>
 		</li>

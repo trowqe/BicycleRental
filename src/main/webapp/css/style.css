@@ -557,3 +557,7 @@ table tr.checked {
 .subheader .topnav li a:hover:not(.active):not(.logo):not(.info-li) {
     background-color: #CCCCCC ;
 } 
+
+.p-20 {
+	padding: 20px;;
+}

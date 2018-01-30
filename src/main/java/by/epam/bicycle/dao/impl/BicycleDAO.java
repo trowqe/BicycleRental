@@ -18,7 +18,7 @@ public class BicycleDAO extends AbstractDAO<Bicycle> {
 			+ "LEFT JOIN bicycle_models m ON b.bicycle_model_id = m.id "
 			+ "left join bicycle_types t on m.bicycle_type_id = t.id "
 			+ "left join rental_points r on b.rental_point_id = r.id WHERE "
-			+ "b.id NOT IN (SELECT bicycle_id FROM rents WHERE datetime_finish is null) order by b.id";
+			+ "b.id NOT IN (SELECT bicycle_id FROM rents WHERE datetime_finish is null) ";
 
 	private static final String SQL_SELECT_BICYCLE_BY_ID = "SELECT b.*, m.*, t.*, r.* from bicycles b "
 			+ "LEFT JOIN bicycle_models m ON b.bicycle_model_id = m.id "
@@ -84,7 +84,9 @@ public class BicycleDAO extends AbstractDAO<Bicycle> {
 			sql += " and m.model_" + getLanguage() + " like ? ";
 			params.add(model);
 		}
-
+		
+		sql += " order by b.id "; 
+		
 		Object[] arrParams = params.toArray();
 
 		return findListOfEntities(sql, arrParams);

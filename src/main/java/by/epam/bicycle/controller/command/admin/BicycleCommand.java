@@ -5,9 +5,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import by.epam.bicycle.config.ConfigurationManager;
 import by.epam.bicycle.controller.CommandException;
 import by.epam.bicycle.controller.command.ActionCommand;
+import by.epam.bicycle.controller.response.CommandResponse;
+import by.epam.bicycle.controller.response.impl.ForwardResponse;
 import by.epam.bicycle.entity.Bicycle;
 import by.epam.bicycle.entity.BicycleModel;
 import by.epam.bicycle.entity.RentalPoint;
@@ -25,10 +26,9 @@ public class BicycleCommand implements ActionCommand {
 	private final static String RENTALPOINTS_ATTRIBUTE = "rentalPoints";
 	private final static String BICYCLEMODELS_ATTRIBUTE = "bicycleModels";
 	private final static String LANGUAGE_ATTRIBUTE = "language";
-	private final static String BICYCLE_PAGE = "path.page.bicycle";
 	
 	@Override
-	public String execute(HttpServletRequest request) throws CommandException {
+	public CommandResponse execute(HttpServletRequest request) throws CommandException {
 		HttpSession session = request.getSession(true);
 		String language = (String) session.getAttribute(LANGUAGE_ATTRIBUTE);
 		
@@ -56,7 +56,7 @@ public class BicycleCommand implements ActionCommand {
 			throw new CommandException(e);
 		}			
 		
-		return ConfigurationManager.getProperty(BICYCLE_PAGE);
+		return new ForwardResponse(CommandResponse.BICYCLE_PAGE);
 	}
 
 }

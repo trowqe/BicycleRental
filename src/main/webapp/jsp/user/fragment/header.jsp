@@ -12,8 +12,8 @@
 					<img src="img/bike.png" height="70" class="logo"/>
 				</a>
 			</li>
-			<li><a href="controller?command=filterbicycles" class="active"><fmt:message key="user.header.bicycles"/></a></li>
-			<li><a href="controller?command=rents"><fmt:message key="user.header.rents"/></a></li>
+			<li><a href="controller?command=filterbicycles" class="${sessionScope.page.equals('bicycles') ? 'active' : ''}"><fmt:message key="user.header.bicycles"/></a></li>
+			<li><a href="controller?command=rents" class="${sessionScope.page.equals('rents') ? 'active' : ''}"><fmt:message key="user.header.rents"/></a></li>
 			<!-- <li><a href="controller?command=rentalpoints"><fmt:message key="user.header.rentalpoints"/></a></li>
 			<li><a href="controller?command=prices"><fmt:message key="user.header.prices"/></a></li>-->	
 			<li class="right dropdown">

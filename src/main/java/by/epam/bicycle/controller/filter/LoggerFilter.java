@@ -11,6 +11,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,6 +36,13 @@ public class LoggerFilter implements Filter {
 		while(params.hasMoreElements()) {
 		  String paramName = params.nextElement();
 		  logger.debug("param name - " + paramName + ", value - " + request.getParameter(paramName));
+		}	
+		
+		HttpSession session = httpRequest.getSession();
+		Enumeration<String> sessionAttributes = session.getAttributeNames();
+		while(sessionAttributes.hasMoreElements()) {
+		  String attributeName = sessionAttributes.nextElement();
+		  logger.debug("attribute name - " + attributeName + ", value - " + session.getAttribute(attributeName).toString());
 		}	
 		chain.doFilter(request, response);
 	}

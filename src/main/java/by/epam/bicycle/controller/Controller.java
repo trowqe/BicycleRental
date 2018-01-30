@@ -2,7 +2,6 @@ package by.epam.bicycle.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +12,10 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import by.epam.bicycle.config.SessionAttributes;
 import by.epam.bicycle.controller.command.ActionCommand;
+import by.epam.bicycle.controller.response.CommandResponse;
+import by.epam.bicycle.controller.response.impl.RedirectResponse;
 
 @WebServlet("/controller")
 public class Controller extends HttpServlet {
@@ -33,27 +35,19 @@ public class Controller extends HttpServlet {
 	private void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String page = null;
-				
 		ActionFactory client = new ActionFactory();
-		ActionCommand command = client.defineCommand(request);
 		
+		CommandResponse commandResponse = null;
 		try {
-			page = command.execute(request);
-			
-			if (page != null) {
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
-				dispatcher.forward(request, response);
-			} 
-			
+			ActionCommand command = client.defineCommand(request);
+			commandResponse = command.execute(request);
 		} catch (CommandException e) {
-			e.printStackTrace();
 			logger.error(e);
-			HttpSession session = request.getSession(true);	
-			session.setAttribute("alert", e);
-			page = request.getHeader("referer");
-			response.sendRedirect(page);
+			HttpSession session = request.getSession();
+			session.setAttribute(SessionAttributes.PAGE, SessionAttributes.ERROR_PAGE);
+			commandResponse = new RedirectResponse(CommandResponse.ERROR_PAGE);
 		}	
+		commandResponse.sendResponse(request, response);
 		
 	}
 

@@ -3,12 +3,15 @@ package by.epam.bicycle.controller.command;
 import javax.servlet.http.HttpServletRequest;
 
 import by.epam.bicycle.config.ConfigurationManager;
+import by.epam.bicycle.controller.response.CommandResponse;
+import by.epam.bicycle.controller.response.impl.ForwardResponse;
 
 public class EmptyCommand implements ActionCommand {
 
-	public String execute(HttpServletRequest request) {
+	public CommandResponse execute(HttpServletRequest request) {
 		String page = ConfigurationManager.getProperty("path.page.login");
-		return page;
+		CommandResponse response = new ForwardResponse(page);
+		return response;
 	}
 
 }

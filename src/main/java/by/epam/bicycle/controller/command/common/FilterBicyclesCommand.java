@@ -1,13 +1,15 @@
-package by.epam.bicycle.controller.command.user;
+package by.epam.bicycle.controller.command.common;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import by.epam.bicycle.config.ConfigurationManager;
+import by.epam.bicycle.config.SessionAttributes;
 import by.epam.bicycle.controller.CommandException;
 import by.epam.bicycle.controller.command.ActionCommand;
+import by.epam.bicycle.controller.response.CommandResponse;
+import by.epam.bicycle.controller.response.impl.ForwardResponse;
 import by.epam.bicycle.entity.Bicycle;
 import by.epam.bicycle.entity.BicycleType;
 import by.epam.bicycle.entity.RentalPoint;
@@ -22,25 +24,33 @@ public class FilterBicyclesCommand implements ActionCommand {
 	private static final String PARAM_NAME_BICYCLE_TYPE = "bicycletype";
 	private static final String PARAM_NAME_FIRM = "firm";
 	private static final String PARAM_NAME_MODEL = "model";
-	
+	private static final String BICYCLES_ATTRIBUTE = "bicycles";
+	private static final String FIRM_ATTRIBUTE = "firm";
+	private static final String MODEL_ATTRIBUTE = "model";
+	private static final String RENTALPOINT_ATTRIBUTE = "rentalpoint";
+	private static final String BICYCLETYPE_ATTRIBUTE = "bicycletype";
+	private static final String RENTALPOINTS_ATTRIBUTE = "rentalPoints";
+	private static final String BICYCLETYPES_ATTRIBUTE = "bicycleTypes";
+
 	private void loadFilter(HttpServletRequest request) throws ServiceException {
 		HttpSession session = request.getSession(true);
 		String language = (String) session.getAttribute("language");
 		
 		RentalPointService rentalPointService = new RentalPointService(language);
 		List<RentalPoint> rentalPoints = rentalPointService.findAll();
-		request.setAttribute("rentalPoints", rentalPoints);
+		request.setAttribute(RENTALPOINTS_ATTRIBUTE, rentalPoints);
 		
 		BicycleTypeService bicycleTypeService = new BicycleTypeService(language);
 		List<BicycleType> bicycleTypes = bicycleTypeService.findAll();
-		request.setAttribute("bicycleTypes", bicycleTypes);
+		request.setAttribute(BICYCLETYPES_ATTRIBUTE, bicycleTypes);
 	}
 	
-	public String execute(HttpServletRequest request) throws CommandException {
-		HttpSession session = request.getSession(true);
-		String language = (String) session.getAttribute("language");
+	public CommandResponse execute(HttpServletRequest request) throws CommandException {
+		HttpSession session = request.getSession();
+		String language = (String) session.getAttribute(SessionAttributes.LANGUAGE);
 		
-		try {
+		try {	
+			
 			loadFilter(request);
 			
 			long rentalPointID = -1;
@@ -55,7 +65,6 @@ public class FilterBicyclesCommand implements ActionCommand {
 				bicycleTypeID = Long.parseLong(request.getParameter(PARAM_NAME_BICYCLE_TYPE));
 			}
 			
-			//TO DO!!!
 			String firm = "";
 			String firmParam = request.getParameter(PARAM_NAME_FIRM);
 			if (firmParam != null) {
@@ -70,24 +79,25 @@ public class FilterBicyclesCommand implements ActionCommand {
 			
 			BicycleService bicycleService = new BicycleService(language);
 			List<Bicycle> bicycles = bicycleService.getActiveBicyclesByFilter(rentalPointID, bicycleTypeID, firm, model);
-			request.setAttribute("bicycles", bicycles);
-
-			request.setAttribute("firm", firm);
-			request.setAttribute("model", model);
-			request.setAttribute("rentalpoint", rentalPointID);
-			request.setAttribute("bicycletype", bicycleTypeID);
+			
+			request.setAttribute(BICYCLES_ATTRIBUTE, bicycles);
+			request.setAttribute(FIRM_ATTRIBUTE, firm);
+			request.setAttribute(MODEL_ATTRIBUTE, model);
+			request.setAttribute(RENTALPOINT_ATTRIBUTE, rentalPointID);
+			request.setAttribute(BICYCLETYPE_ATTRIBUTE, bicycleTypeID);
+			
 		} catch (ServiceException e) {
 			throw new CommandException(e);
-		}
+		}		
+		User user = (User) session.getAttribute(SessionAttributes.USER);
 		
-		User user = (User) session.getAttribute("user");
+		String page = CommandResponse.BICYCLES_PAGE;
 		if (user.getRole().isAdmin()) {
-			return ConfigurationManager.getProperty("path.page.adminbicycles");	
-		} else {
-			return ConfigurationManager.getProperty("path.page.bicycles");	
+			page = CommandResponse.ADMINBICYCLES_PAGE;
 		}
-			
 		
+		session.setAttribute(SessionAttributes.PAGE, SessionAttributes.BICYCLES_PAGE);				
+		return new ForwardResponse(page);
 		
 	}
 

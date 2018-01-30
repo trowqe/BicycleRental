@@ -1,4 +1,4 @@
-package by.epam.bicycle.controller.command;
+package by.epam.bicycle.controller.command.common;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import by.epam.bicycle.config.ConfigurationManager;
 import by.epam.bicycle.config.MessageManager;
 import by.epam.bicycle.controller.CommandException;
+import by.epam.bicycle.controller.command.ActionCommand;
 import by.epam.bicycle.entity.Bicycle;
 import by.epam.bicycle.entity.BicycleType;
 import by.epam.bicycle.entity.RentalPoint;

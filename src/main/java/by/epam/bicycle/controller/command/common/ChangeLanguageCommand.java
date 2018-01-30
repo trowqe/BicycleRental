@@ -1,9 +1,10 @@
-package by.epam.bicycle.controller.command;
+package by.epam.bicycle.controller.command.common;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import by.epam.bicycle.config.ConfigurationManager;
+import by.epam.bicycle.controller.command.ActionCommand;
 
 public class ChangeLanguageCommand implements ActionCommand {
 	

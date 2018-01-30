@@ -1,4 +1,4 @@
-package by.epam.bicycle.controller.command;
+package by.epam.bicycle.controller.command.user;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -8,6 +8,7 @@ import by.epam.bicycle.config.MessageManager;
 import by.epam.bicycle.controller.CommandException;
 import by.epam.bicycle.controller.ExceptionTypeEnum;
 import by.epam.bicycle.controller.ValidationException;
+import by.epam.bicycle.controller.command.ActionCommand;
 import by.epam.bicycle.entity.Role;
 import by.epam.bicycle.entity.User;
 import by.epam.bicycle.service.ServiceException;

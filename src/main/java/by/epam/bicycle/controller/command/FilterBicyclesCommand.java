@@ -10,6 +10,7 @@ import by.epam.bicycle.controller.CommandException;
 import by.epam.bicycle.entity.Bicycle;
 import by.epam.bicycle.entity.BicycleType;
 import by.epam.bicycle.entity.RentalPoint;
+import by.epam.bicycle.entity.User;
 import by.epam.bicycle.service.ServiceException;
 import by.epam.bicycle.service.impl.BicycleService;
 import by.epam.bicycle.service.impl.BicycleTypeService;
@@ -77,7 +78,16 @@ public class FilterBicyclesCommand implements ActionCommand {
 		} catch (ServiceException e) {
 			throw new CommandException(e);
 		}
-		return ConfigurationManager.getProperty("path.page.bicycles");
+		
+		User user = (User) session.getAttribute("user");
+		if (user.getRole().isAdmin()) {
+			return ConfigurationManager.getProperty("path.page.adminbicycles");	
+		} else {
+			return ConfigurationManager.getProperty("path.page.bicycles");	
+		}
+			
+		
+		
 	}
 
 }

@@ -1,6 +1,7 @@
 package by.epam.bicycle.controller.command;
 
 import by.epam.bicycle.controller.command.admin.UpdateUserStatusCommand;
+import by.epam.bicycle.controller.command.admin.UsersCommand;
 
 public enum CommandEnum {
 	LOGIN {
@@ -55,7 +56,7 @@ public enum CommandEnum {
 	},
 	USERS {
 		{
-			this.command = new CloseRentCommand();
+			this.command = new UsersCommand();
 		}
 	},
 	UPDATEUSERSTATUS {

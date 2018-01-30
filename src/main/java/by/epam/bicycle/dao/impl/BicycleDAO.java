@@ -71,12 +71,12 @@ public class BicycleDAO extends AbstractDAO<Bicycle> {
 		}
 
 		if (!firm.equals("")) {
-			sql += " and m.firm like ? ";
+			sql += " and m.firm_" + getLanguage() + " like ? ";
 			params.add(firm);
 		}
 
 		if (!model.equals("")) {
-			sql += " and m.model like ? ";
+			sql += " and m.model_" + getLanguage() + " like ? ";
 			params.add(model);
 		}
 

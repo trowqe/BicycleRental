@@ -24,10 +24,38 @@ public class BicycleService extends AbstractService<Bicycle> {
 		ConnectionPool pool = ConnectionPool.getInstance();
 		Connection connection = pool.getConnection();
 		String language = getLanguage();
+		
 		BicycleDAO dao = new BicycleDAO(connection, language);
+		List<Bicycle> bicycles = null;
 		try {
-			List<Bicycle> bicycles = dao.findActiveBicycleByFilter(rentalPointId, bicycleTypeId, firm, model);
-			return bicycles;
+			bicycles = dao.findActiveBicycleByFilter(rentalPointId, bicycleTypeId, firm, model);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		} finally {
+			pool.returnConnectionToPool(connection);
+		}
+		return bicycles;
+	}
+
+	public void createByPointAndModelId(long rentalPointId, long bicycleModelId) throws ServiceException {
+		ConnectionPool pool = ConnectionPool.getInstance();
+		Connection connection = pool.getConnection();
+		BicycleDAO dao = new BicycleDAO(connection, getLanguage());
+		try {
+			dao.createByPointAndModelId(rentalPointId, bicycleModelId);
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		} finally {
+			pool.returnConnectionToPool(connection);
+		}
+	}
+	
+	public void updateByPointAndModelId(long id, long rentalPointId, long bicycleModelId) throws ServiceException {
+		ConnectionPool pool = ConnectionPool.getInstance();
+		Connection connection = pool.getConnection();
+		BicycleDAO dao = new BicycleDAO(connection, getLanguage());
+		try {
+			dao.updateByPointAndModelId(id, rentalPointId, bicycleModelId);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		} finally {

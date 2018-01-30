@@ -12,19 +12,24 @@ public class BicycleDAO extends AbstractDAO<Bicycle> {
 	private static final String SQL_SELECT_ALL_BICYCLES = "select b.*, m.*, r.*,  t.* from bicycles b "
 			+ "left join bicycle_models m on b.bicycle_model_id = m.id "
 			+ "left join bicycle_types t on m.bicycle_type_id = t.id "
-			+ "left join rental_points r on b.rental_point_id = r.id";
+			+ "left join rental_points r on b.rental_point_id = r.id order by b.id";
 
 	private static final String SQL_SELECT_BICYCLE_BY_FILTER = "SELECT b.*, m.*, t.*, r.* from bicycles b "
 			+ "LEFT JOIN bicycle_models m ON b.bicycle_model_id = m.id "
 			+ "left join bicycle_types t on m.bicycle_type_id = t.id "
 			+ "left join rental_points r on b.rental_point_id = r.id WHERE "
-			+ "b.id NOT IN (SELECT bicycle_id FROM rents WHERE datetime_finish is null) ";
+			+ "b.id NOT IN (SELECT bicycle_id FROM rents WHERE datetime_finish is null) order by b.id";
 
 	private static final String SQL_SELECT_BICYCLE_BY_ID = "SELECT b.*, m.*, t.*, r.* from bicycles b "
 			+ "LEFT JOIN bicycle_models m ON b.bicycle_model_id = m.id "
 			+ "left join bicycle_types t on m.bicycle_type_id = t.id "
 			+ "left join rental_points r on b.rental_point_id = r.id WHERE b.id = ?";
-
+	
+	private static final String SQL_INSERT_BICYCLE = "INSERT INTO bicycles (rental_point_id, bicycle_model_id) " 
+			+ " VALUES(?, ?) ";
+	
+	private static final String SQL_UPDATE_BICYCLE = "UPDATE bicycles SET rental_point_id = ?, bicycle_model_id = ? " 
+			+ " WHERE id = ? ";
 
 	public BicycleDAO() {
 		super(Bicycle.class, Bicycle.TABLE_NAME);
@@ -83,6 +88,14 @@ public class BicycleDAO extends AbstractDAO<Bicycle> {
 		Object[] arrParams = params.toArray();
 
 		return findListOfEntities(sql, arrParams);
+	}
+
+	public void createByPointAndModelId(long rentalPointId, long bicycleModelId) throws DAOException {
+		executeUpdateEntitie(SQL_INSERT_BICYCLE, rentalPointId, bicycleModelId);		
+	}
+	
+	public void updateByPointAndModelId(long id, long rentalPointId, long bicycleModelId) throws DAOException {
+		executeUpdateEntitie(SQL_UPDATE_BICYCLE, rentalPointId, bicycleModelId, id);		
 	}
 
 }

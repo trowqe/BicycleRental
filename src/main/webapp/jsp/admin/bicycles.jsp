@@ -13,15 +13,28 @@
 	</head>
 	<body>
 		<c:import url="fragment\header.jsp" />
+		<header class="subheader" >
+			<div class="content">
+				<div class="row">
+					<nav >
+						<ul class="topnav">
+							<li><a href="controller?command=bicycle"><i class="fa fa-plus-square-o" aria-hidden="true"></i> <fmt:message key="subheader.bicycles.create"/></a></li>
+							<li><a href="javascript:updateBicycle()"><i class="fa fa-minus-square-o" aria-hidden="true"></i> <fmt:message key="subheader.bicycles.update"/></a></li>
+							<li><a href="javascript:deleteBicycle()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <fmt:message key="subheader.bicycles.delete"/></a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</header>
 		<main>
 			<m:alertbox/>
 			<section class="content p-t-15">
 				<div class="row">
-					<div class="col-4 filter grey">
-						<form name="filterbikes" id="filterbikes" method="POST" action="controller">
+					<div class="col-4">
+						<form name="filterbikes" id="filterbikes" method="POST" action="controller" class="filter grey">
 							<input type="hidden" name="command" value="filterbicycles" />
-							<label for="rentalpoint"><b><fmt:message key="bicycles.select.rentalpoint"/></b></label>
 							
+							<label for="rentalpoint"><b><fmt:message key="bicycles.select.rentalpoint"/></b></label>
 							<select name="rentalpoint" id="rentalpoint">
 								<option></option>
 								<c:forEach var="elem" items="${rentalPoints}" varStatus="status">
@@ -51,7 +64,7 @@
 					</div>
 					
 					<div class="col-8">
-						<table id="freeBicycles">
+						<table id="bicycles">
 						<tr>
 							<th></th>
 							<th><fmt:message key="bicycles.table.id"/></th>

@@ -116,6 +116,15 @@ function setChecked(obj, id) {
 	document.getElementById("user"+id).checked = true;
 }
 
+function setCheckedBicycle(obj, id) {
+	list= document.getElementById("bicycles").getElementsByTagName("tr");
+	for (var i=0; i< list.length; ++i)  {
+		list[i].classList.remove("checked");
+	}
+	obj.classList.add("checked");
+	document.getElementById("bicycle"+id).checked = true;
+}
+
 function blockUser() {
 	var radios = document.getElementsByName('user');
 	for (var i = 0, length = radios.length; i < length; i++) {
@@ -131,6 +140,36 @@ function unblockUser() {
 	for (var i = 0, length = radios.length; i < length; i++) {
 		if (radios[i].checked) {
 			window.location="controller?command=updateuserstatus&userid="+radios[i].value+"&status=unblock";
+			break;
+		}
+	}
+}
+
+function unblockUser() {
+	var radios = document.getElementsByName('user');
+	for (var i = 0, length = radios.length; i < length; i++) {
+		if (radios[i].checked) {
+			window.location="controller?command=updateuserstatus&userid="+radios[i].value+"&status=unblock";
+			break;
+		}
+	}
+}
+
+function updateBicycle() {
+	var radios = document.getElementsByName('bicycle');
+	for (var i = 0, length = radios.length; i < length; i++) {
+		if (radios[i].checked) {
+			window.location="controller?command=bicycle&bicycleid="+radios[i].value;
+			break;
+		}
+	}
+}
+
+function deleteBicycle() {
+	var radios = document.getElementsByName('bicycle');
+	for (var i = 0, length = radios.length; i < length; i++) {
+		if (radios[i].checked) {
+			window.location="controller?command=deletebicycle&bicycleid="+radios[i].value;
 			break;
 		}
 	}

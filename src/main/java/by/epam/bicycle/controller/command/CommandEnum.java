@@ -1,5 +1,9 @@
 package by.epam.bicycle.controller.command;
 
+import by.epam.bicycle.controller.command.admin.AddBicycleCommand;
+import by.epam.bicycle.controller.command.admin.BicycleCommand;
+import by.epam.bicycle.controller.command.admin.DeleteBicycleCommand;
+import by.epam.bicycle.controller.command.admin.UpdateBicycleCommand;
 import by.epam.bicycle.controller.command.admin.UpdateUserStatusCommand;
 import by.epam.bicycle.controller.command.admin.UsersCommand;
 
@@ -62,6 +66,26 @@ public enum CommandEnum {
 	UPDATEUSERSTATUS {
 		{
 			this.command = new UpdateUserStatusCommand();
+		}
+	},
+	BICYCLE {
+		{
+			this.command = new BicycleCommand();
+		}
+	},
+	ADDBICYCLE {
+		{
+			this.command = new AddBicycleCommand();
+		}
+	},
+	UPDATEBICYCLE {
+		{
+			this.command = new UpdateBicycleCommand();
+		}
+	},
+	DELETEBICYCLE {
+		{
+			this.command = new DeleteBicycleCommand();
 		}
 	};
 	ActionCommand command;

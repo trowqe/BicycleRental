@@ -22,7 +22,7 @@ public abstract class AbstractDAO<T extends Entity> implements EntityDAO<T> {
 	
 	private final static String SELECT_ALL_ENTITIES = "select * from ";
 	private final static String SELECT_ENTITIE_BY_ID = " where id = ?";	
-	private final static String DELETE_ENTITIE_BY_ID = "delete from ? where id = ?";	
+	private final static String DELETE_ENTITIE_BY_ID = "delete from ";	
 	
 	public AbstractDAO(Class<T> entityClass, String tableName) {
 		this.entityClass = entityClass;
@@ -80,12 +80,13 @@ public abstract class AbstractDAO<T extends Entity> implements EntityDAO<T> {
 	}
 	
 	public void delete(long id) throws DAOException {
-		executeUpdateEntitie(DELETE_ENTITIE_BY_ID, tableName, id);
+		String sql = DELETE_ENTITIE_BY_ID + tableName + SELECT_ENTITIE_BY_ID;
+		executeUpdateEntitie(sql, id);
 	}
 	
 	public void delete(T entity) throws DAOException {
 		long id = entity.getId();
-		executeUpdateEntitie(DELETE_ENTITIE_BY_ID, tableName, id);
+		delete(id);
 	}
 	
 	public T findSingleEntitie(String sql) throws DAOException {

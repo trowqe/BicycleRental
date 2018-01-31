@@ -21,9 +21,9 @@ public class HashUtils {
 			}
 			return sb.toString();
 		} catch (UnsupportedEncodingException e) {
-			logger.error(e.getMessage(), e);
+			logger.error(e);
 		} catch (NoSuchAlgorithmException e) {
-			logger.error(e.getMessage(), e);
+			logger.error(e);
 		}
 		return "";
 	}

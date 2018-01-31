@@ -48,6 +48,7 @@ public class ConnectionPool {
 	private static final String DB_USER_CONFIG = "db.user";
 	private static final String DB_PASSWORD_CONFIG = "db.password";
 	private static final String DB_URL_CONFIG = "db.url";
+	private static final String DB_MAX_POOL_SIZE = "db.max_pool_size";
 	
 	private static Logger logger = LogManager.getLogger(ConnectionPool.class);
 	
@@ -55,7 +56,7 @@ public class ConnectionPool {
 	 * Sets the max size of pool from configuration file and initialize the connection pool.
 	 */
 	private ConnectionPool() {
-		MAX_POOL_SIZE = Integer.parseInt(ConfigurationManager.getProperty("db.max_pool_size"));
+		MAX_POOL_SIZE = Integer.parseInt(ConfigurationManager.getProperty(DB_MAX_POOL_SIZE));
 
 		try {
 			initializeConnectionPool();

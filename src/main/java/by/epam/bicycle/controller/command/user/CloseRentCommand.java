@@ -47,10 +47,6 @@ public class CloseRentCommand implements ActionCommand {
 			user.setBalance(newBalance);
 			userService.updateBalance(user.getId(), newBalance);			
 			
-/*			RentService service = new RentService(language);
-			List<Rent> rents = service.getRentsByUserId(user.getId());
-			request.setAttribute("rents", rents);*/
-			
 		} catch (ServiceException e) {
 			throw new CommandException(e);
 		}

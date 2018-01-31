@@ -220,12 +220,12 @@ public class User extends Entity {
 	}
 	
 	public boolean isBlocked() {
-		short blockedStatus = Short.parseShort(ConfigurationManager.getProperty("user_status.blocked"));
+		short blockedStatus = Short.parseShort(ConfigurationManager.getProperty(ConfigurationManager.USER_STATUS_BLOCKED));
 		return (status == blockedStatus);
 	}
 	
 	public boolean isActive() {
-		short activeStatus = Short.parseShort(ConfigurationManager.getProperty("user_status.active"));
+		short activeStatus = Short.parseShort(ConfigurationManager.getProperty(ConfigurationManager.USER_STATUS_ACTIVE));
 		return (status == activeStatus);
 	}
 	

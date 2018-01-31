@@ -56,15 +56,14 @@ public class UserDAO extends AbstractDAO<User> {
 			String email = user.getEmail();
 			String login = user.getLogin();
 			String password = user.getPassword();
-			short status = Short.parseShort(ConfigurationManager.getProperty("user_status.active"));
+			short status = Short.parseShort(ConfigurationManager.getProperty(ConfigurationManager.USER_STATUS_ACTIVE));
 			long roleId = user.getRole().getId();
 			
 			statement = getWrappedConnection().getPreparedStatement(SQL_INSERT_NEW_USER, name, surname, patronymic,
 					mobilePhone, email, login, password, status, roleId, new Date());
 			statement.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DAOException("Cannot insert user: " + e.getMessage(), e);
+			throw new DAOException(e);
 		} finally {
 			getWrappedConnection().closeResultSet(resultSet);
 			getWrappedConnection().closeStatement(statement);

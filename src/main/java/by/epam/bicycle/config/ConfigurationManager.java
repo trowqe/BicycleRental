@@ -8,6 +8,7 @@ public class ConfigurationManager {
 	public static final String ROLE_USER = "role.user";
 	public static final String USER_STATUS_ACTIVE = "user_status.active";
 	public static final String USER_STATUS_BLOCKED = "user_status.blocked";
+	public static final String LANGUAGE_DEFAULT = "language.default";
 	
 	private ConfigurationManager() { } 
 	

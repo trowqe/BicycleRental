@@ -27,7 +27,7 @@ public abstract class AbstractDAO<T extends Entity> implements EntityDAO<T> {
 	public AbstractDAO(Class<T> entityClass, String tableName) {
 		this.entityClass = entityClass;
 		this.tableName = tableName;
-		this.language = ConfigurationManager.getProperty("language.default");
+		this.language = ConfigurationManager.getProperty(ConfigurationManager.LANGUAGE_DEFAULT);
 	}
 	
 	public AbstractDAO(Class<T> entityClass, String tableName, String language) {
@@ -104,7 +104,7 @@ public abstract class AbstractDAO<T extends Entity> implements EntityDAO<T> {
 			}
 			
 		} catch (SQLException e) {
-			throw new DAOException("Cannot find entitie", e);
+			throw new DAOException(e);
 		} finally {
 			getWrappedConnection().closeResultSet(resultSet);
 			getWrappedConnection().closeStatement(statement);
@@ -129,7 +129,7 @@ public abstract class AbstractDAO<T extends Entity> implements EntityDAO<T> {
 			}
 			
 		} catch (SQLException e) {
-			throw new DAOException("Cannot find enitie", e);
+			throw new DAOException(e);
 		} finally {
 			getWrappedConnection().closeResultSet(resultSet);
 			getWrappedConnection().closeStatement(statement);
@@ -155,7 +155,7 @@ public abstract class AbstractDAO<T extends Entity> implements EntityDAO<T> {
 				entities.add(entitie);
 			}
 		} catch (SQLException e) {
-			throw new DAOException("Cannot find enities", e);
+			throw new DAOException(e);
 		} finally {
 			getWrappedConnection().closeResultSet(resultSet);
 			getWrappedConnection().closeStatement(statement);
@@ -173,7 +173,7 @@ public abstract class AbstractDAO<T extends Entity> implements EntityDAO<T> {
 			statement = getWrappedConnection().getPreparedStatement(sql, params);
 			statement.executeUpdate();
 		} catch (SQLException e) {
-			throw new DAOException("Cannot execute sql", e);
+			throw new DAOException(e);
 		} finally {
 			getWrappedConnection().closeResultSet(resultSet);
 			getWrappedConnection().closeStatement(statement);

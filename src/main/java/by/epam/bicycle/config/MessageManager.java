@@ -16,15 +16,16 @@ public class MessageManager {
 	public static final String BICYCLEUPDATED = "message.bicycleupdated";
 	public static final String COMMONERROR = "message.commonerror";
 	public static final String USERSTATUSCHANGED = "message.userstatuschanged";
+	public static final String MESSAGES_BUNDLE = "localization.messages";
 	
 	private MessageManager() { }
 	
 	public static String getProperty(String language, String key) {
 		if (language == null || language.isEmpty()) {
-			language = ConfigurationManager.getProperty("language.default");
+			language = ConfigurationManager.getProperty(ConfigurationManager.LANGUAGE_DEFAULT);
 		}
 		Locale locale = new Locale(language);
-		ResourceBundle resourceBundle = ResourceBundle.getBundle("localization.messages", locale);
+		ResourceBundle resourceBundle = ResourceBundle.getBundle(MESSAGES_BUNDLE, locale);
 		return resourceBundle.getString(key);
 	}
 

@@ -52,7 +52,7 @@ public class RentDAO extends AbstractDAO<Rent> {
 					tariffId);
 			statement.executeUpdate();
 		} catch (SQLException e) {
-			throw new DAOException("Cannot insert rent", e);
+			throw new DAOException(e);
 		} finally {
 			getWrappedConnection().closeResultSet(resultSet);
 			getWrappedConnection().closeStatement(statement);

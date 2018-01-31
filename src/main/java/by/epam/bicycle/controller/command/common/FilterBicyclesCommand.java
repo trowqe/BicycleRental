@@ -34,7 +34,7 @@ public class FilterBicyclesCommand implements ActionCommand {
 
 	private void loadFilter(HttpServletRequest request) throws ServiceException {
 		HttpSession session = request.getSession(true);
-		String language = (String) session.getAttribute("language");
+		String language = (String) session.getAttribute(SessionAttributes.LANGUAGE);
 		
 		RentalPointService rentalPointService = new RentalPointService(language);
 		List<RentalPoint> rentalPoints = rentalPointService.findAll();

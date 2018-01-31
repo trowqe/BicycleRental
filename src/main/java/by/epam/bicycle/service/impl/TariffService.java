@@ -25,13 +25,14 @@ public class TariffService extends AbstractService<Tariff> {
 		Connection connection = pool.getConnection();
 		String language = getLanguage();
 		TariffDAO dao = new TariffDAO(connection, language);
+		List<Tariff> tariffs = null;
 		try {
-			List<Tariff> tariffs = dao.findTariffsByBicycleTypeId(bicycleTypeId);
-			return tariffs;
+			tariffs = dao.findTariffsByBicycleTypeId(bicycleTypeId);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		} finally {
 			pool.returnConnectionToPool(connection);
 		}
+		return tariffs;
 	}	
 }

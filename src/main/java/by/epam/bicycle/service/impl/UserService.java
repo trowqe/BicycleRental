@@ -27,15 +27,16 @@ public class UserService extends AbstractService<User>{
 		Connection connection = pool.getConnection();
 		String language = getLanguage();
 		UserDAO dao = new UserDAO(connection, language);
+		User user = null;
 		try {
 			password = HashUtils.getHashMD5(password);
-			User user = dao.findUserByLoginAndPassword(login, password);
-			return user;
+			user = dao.findUserByLoginAndPassword(login, password);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		} finally {
 			pool.returnConnectionToPool(connection);
 		}
+		return user;
 	}
 	
 	public boolean isLoginUnique(String login) throws ServiceException {

@@ -47,6 +47,7 @@ public class Controller extends HttpServlet {
 			session.setAttribute(SessionAttributes.PAGE, SessionAttributes.ERROR_PAGE);
 			commandResponse = new RedirectResponse(CommandResponse.ERROR_PAGE);
 		}	
+		
 		commandResponse.sendResponse(request, response);
 		
 	}

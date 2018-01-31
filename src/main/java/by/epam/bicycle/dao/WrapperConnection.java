@@ -41,7 +41,7 @@ public class WrapperConnection {
 			try {
 				statement.close();
 			} catch (SQLException e) {
-				logger.error("Cannot close Statement", e);
+				logger.error(e);
 			}
 		}
 	}
@@ -51,7 +51,7 @@ public class WrapperConnection {
 			try {
 				resultSet.close();
 			} catch (SQLException e) {
-				logger.error("Cannot close ResultSet", e);
+				logger.error(e);
 			}
 		}
 	}

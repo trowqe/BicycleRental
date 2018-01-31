@@ -15,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import by.epam.bicycle.config.ConfigurationManager;
+import by.epam.bicycle.config.SessionAttributes;
 
 @WebFilter(urlPatterns = { "/*" })
 public class LocalFilter implements Filter {
@@ -29,9 +30,9 @@ public class LocalFilter implements Filter {
 		HttpServletRequest httpReq = (HttpServletRequest) request;
 		HttpSession session = httpReq.getSession(true);
 		
-		if (session.getAttribute("language") == null)  {
-			String language = ConfigurationManager.getProperty("language.default");
-			session.setAttribute("language", language);
+		if (session.getAttribute(SessionAttributes.LANGUAGE) == null)  {
+			String language = ConfigurationManager.getProperty(ConfigurationManager.LANGUAGE_DEFAULT);
+			session.setAttribute(SessionAttributes.LANGUAGE, language);
 			logger.debug("language = " + language);
 		}	
 				

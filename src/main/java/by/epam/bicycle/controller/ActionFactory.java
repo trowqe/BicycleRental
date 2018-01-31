@@ -7,10 +7,11 @@ import by.epam.bicycle.controller.command.CommandEnum;
 import by.epam.bicycle.controller.command.EmptyCommand;
 
 public class ActionFactory {
+	private static final String COMMAND_PARAM = "command";
 	
 	public ActionCommand defineCommand(HttpServletRequest request) throws CommandException {
 		ActionCommand current = new EmptyCommand();
-		String action = request.getParameter("command");
+		String action = request.getParameter(COMMAND_PARAM);
 		
 		if (action == null || action.isEmpty()) {
 			return current;

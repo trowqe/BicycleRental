@@ -19,11 +19,9 @@ public class AlertBoxHandler extends TagSupport {
 	private static Logger logger = LogManager.getLogger(AlertBoxHandler.class);
 	
 	public int doStartTag() throws JspException {
-		logger.debug("AlertBoxHandler");
 		JspWriter out = pageContext.getOut();
 		HttpSession session = pageContext.getSession();
 		CommandMessage message = (CommandMessage) session.getAttribute(SessionAttributes.ALERT);
-		logger.debug("message = " + message);
 		if (message != null) {
 			try {
 				logger.debug("messageType = " + message.getType().toString());

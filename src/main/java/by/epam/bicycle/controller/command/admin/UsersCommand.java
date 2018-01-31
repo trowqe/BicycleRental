@@ -17,13 +17,19 @@ import by.epam.bicycle.service.impl.UserService;
 public class UsersCommand implements ActionCommand {
 	private final static String USERS_ATTRIBUTE = "users";
 	
+	private UserService userService;
+	
+	public UsersCommand(UserService userService) {
+		this.userService = userService;
+	}
+
 	@Override
 	public CommandResponse execute(HttpServletRequest request) throws CommandException {
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession();
 		String language = (String) session.getAttribute(SessionAttributes.LANGUAGE);
 		
 		try {
-			UserService userService = new UserService(language);
+			userService.setLanguage(language);
 			List<User> users = userService.findAllUsers();
 	
 			request.setAttribute(USERS_ATTRIBUTE, users);

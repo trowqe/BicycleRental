@@ -16,11 +16,18 @@ import by.epam.bicycle.controller.command.user.CreateUserCommand;
 import by.epam.bicycle.controller.command.user.PrepareOrderCommand;
 import by.epam.bicycle.controller.command.user.RentsCommand;
 import by.epam.bicycle.controller.command.user.ReturnBicycleCommand;
+import by.epam.bicycle.service.impl.BicycleModelService;
+import by.epam.bicycle.service.impl.BicycleService;
+import by.epam.bicycle.service.impl.BicycleTypeService;
+import by.epam.bicycle.service.impl.RentService;
+import by.epam.bicycle.service.impl.RentalPointService;
+import by.epam.bicycle.service.impl.TariffService;
+import by.epam.bicycle.service.impl.UserService;
 
 public enum CommandEnum {
 	LOGIN {
 		{
-			this.command = new LoginCommand();
+			this.command = new LoginCommand(new UserService());
 		}
 	},
 	LOGOUT {
@@ -30,12 +37,12 @@ public enum CommandEnum {
 	},
 	FILTERBICYCLES {
 		{
-			this.command = new FilterBicyclesCommand();
+			this.command = new FilterBicyclesCommand(new BicycleService(), new RentalPointService(), new BicycleTypeService());
 		}
 	},
 	PREPAREORDER {
 		{
-			this.command = new PrepareOrderCommand();
+			this.command = new PrepareOrderCommand(new BicycleService(), new TariffService());
 		}
 	},
 	CREATEORDER {
@@ -55,47 +62,47 @@ public enum CommandEnum {
 	},
 	RENTS {
 		{
-			this.command = new RentsCommand();
+			this.command = new RentsCommand(new RentService());
 		}
 	},
 	RETURNBICYCLE {
 		{
-			this.command = new ReturnBicycleCommand();
+			this.command = new ReturnBicycleCommand(new RentService());
 		}
 	},
 	CLOSERENT {
 		{
-			this.command = new CloseRentCommand();
+			this.command = new CloseRentCommand(new RentService(), new UserService());
 		}
 	},
 	USERS {
 		{
-			this.command = new UsersCommand();
+			this.command = new UsersCommand(new UserService());
 		}
 	},
 	UPDATEUSERSTATUS {
 		{
-			this.command = new UpdateUserStatusCommand();
+			this.command = new UpdateUserStatusCommand(new UserService());
 		}
 	},
 	BICYCLE {
 		{
-			this.command = new BicycleCommand();
+			this.command = new BicycleCommand(new BicycleService(), new RentalPointService(), new BicycleModelService());
 		}
 	},
 	ADDBICYCLE {
 		{
-			this.command = new AddBicycleCommand();
+			this.command = new AddBicycleCommand(new BicycleService());
 		}
 	},
 	UPDATEBICYCLE {
 		{
-			this.command = new UpdateBicycleCommand();
+			this.command = new UpdateBicycleCommand(new BicycleService());
 		}
 	},
 	DELETEBICYCLE {
 		{
-			this.command = new DeleteBicycleCommand();
+			this.command = new DeleteBicycleCommand(new BicycleService());
 		}
 	};
 	ActionCommand command;

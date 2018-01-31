@@ -17,21 +17,28 @@ import by.epam.bicycle.service.impl.BicycleService;
 import by.epam.bicycle.service.impl.TariffService;
 
 public class PrepareOrderCommand implements ActionCommand  {
-	private static final String BICYCLE_ID_PARAM = "bicycleid";
+	public static final String BICYCLE_ID_PARAM = "bicycleid";
 	private static final String RENTPOINTID_ATTRIBUTE = "orderRentPointId";
 	private static final String BICYCLEID_ATTRIBUTE = "orderBicycleId";
 	private static final String RENTPOINT_ATTRIBUTE = "orderRentPoint";
 	private static final String BICYCLEMODEL_ATTRIBUTE = "orderBicycleModel";
 	private static final String TARIFFS_ATTRIBUTE = "tariffs";
 	
+	private BicycleService bicycleService;
+	private TariffService tariffService;
 	
+	public PrepareOrderCommand(BicycleService bicycleService, TariffService tariffService) {
+		this.bicycleService = bicycleService;
+		this.tariffService = tariffService;
+	}
+
 	public CommandResponse execute(HttpServletRequest request) throws CommandException {
 		long bicycleId = Long.parseLong(request.getParameter(BICYCLE_ID_PARAM));
 		try {
-			HttpSession session = request.getSession(true);
+			HttpSession session = request.getSession();
 			String language = (String) session.getAttribute(SessionAttributes.LANGUAGE);
 			
-			BicycleService bicycleService = new BicycleService(language);
+			bicycleService.setLanguage(language);
 			Bicycle bicycle = bicycleService.findEntityById(bicycleId);
 			Long rentPointId = bicycle.getPoint().getId();
 			String orderRentPoint = bicycle.getPoint().getAddress();
@@ -42,8 +49,8 @@ public class PrepareOrderCommand implements ActionCommand  {
 			request.setAttribute(RENTPOINT_ATTRIBUTE, orderRentPoint);
 			request.setAttribute(BICYCLEMODEL_ATTRIBUTE, orderBicycleModel);
 			
-			Long bicycleTypeId = bicycle.getModel().getBicycleType().getId();
-			TariffService tariffService = new TariffService(language);
+			long bicycleTypeId = bicycle.getModel().getBicycleType().getId();
+			tariffService.setLanguage(language);
 			List<Tariff> tariffs = tariffService.getTarriffListByBicycleTypeId(bicycleTypeId);
 			request.setAttribute(TARIFFS_ATTRIBUTE, tariffs);
 			

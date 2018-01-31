@@ -15,17 +15,21 @@ import by.epam.bicycle.service.ServiceException;
 import by.epam.bicycle.service.impl.BicycleService;
 
 public class DeleteBicycleCommand implements ActionCommand {
-	private final static String BICYCLE_ID_PARAM = "bicycleid";
+	public final static String BICYCLE_ID_PARAM = "bicycleid";
+	private BicycleService service;
+
+	public DeleteBicycleCommand(BicycleService service) {
+		this.service = service;
+	}
 
 	@Override
 	public CommandResponse execute(HttpServletRequest request) throws CommandException {
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
 		String language = (String) session.getAttribute(SessionAttributes.LANGUAGE);
 
 		String bicycleIdParam = request.getParameter(BICYCLE_ID_PARAM);
 		long bicycleId = Long.parseLong(bicycleIdParam);
 
-		BicycleService service = new BicycleService();
 		try {
 			service.delete(bicycleId);
 		} catch (ServiceException e) {

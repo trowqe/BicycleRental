@@ -17,16 +17,23 @@ import by.epam.bicycle.service.impl.RentService;
 
 public class RentsCommand implements ActionCommand {
 	private final static String RENTS_ATTRIBUTE = "rents";
+	
+	private RentService service;
+	
+	public RentsCommand(RentService service) {
+		this.service = service;
+	}
+	
 	@Override
 	public CommandResponse execute(HttpServletRequest request) throws CommandException {
-		HttpSession session = request.getSession(true);
-		
-		String language = (String) session.getAttribute(SessionAttributes.LANGUAGE);
+		HttpSession session = request.getSession();	
 		
 		User user = (User) session.getAttribute(SessionAttributes.USER);
 		long userId = user.getId();
-			
-		RentService service = new RentService(language);
+		
+		String language = (String) session.getAttribute(SessionAttributes.LANGUAGE);
+		service.setLanguage(language);
+		
 		try {
 			List<Rent> rents = service.getRentsByUserId(userId);
 			request.setAttribute(RENTS_ATTRIBUTE, rents);

@@ -22,18 +22,20 @@ import by.epam.bicycle.service.impl.UserService;
 public class LoginCommand implements ActionCommand {
 	private static Logger logger = LogManager.getLogger(LoginCommand.class);
 
-	private static final String PARAM_NAME_LOGIN = "login";
-	private static final String PARAM_NAME_PASSWORD = "password";
+	public static final String PARAM_NAME_LOGIN = "login";
+	public static final String PARAM_NAME_PASSWORD = "password";
+	
+	private UserService service;
+	
+	public LoginCommand(UserService service) {
+		this.service = service;
+	}
 
 	public CommandResponse execute(HttpServletRequest request) throws CommandException {
-		String page = null;
 		String login = request.getParameter(PARAM_NAME_LOGIN);
 		String pass = request.getParameter(PARAM_NAME_PASSWORD);
 
-		User user = null;
-
-		UserService service = new UserService();
-		
+		User user = null;		
 		try {
 			user = service.getUserByLoginAndPassword(login, pass);
 		} catch (ServiceException e) {
@@ -60,7 +62,8 @@ public class LoginCommand implements ActionCommand {
 		session.setAttribute(SessionAttributes.USER, user);
 		Role userRole = user.getRole();
 		logger.debug("userRole = " + userRole.getName());
-
+		
+		String page = null;
 		if (userRole.isUser()) {
 			page = CommandResponse.BICYCLES_COMMAND;
 			session.setAttribute(SessionAttributes.PAGE, SessionAttributes.BICYCLES_PAGE);

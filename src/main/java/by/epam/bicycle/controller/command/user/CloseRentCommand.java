@@ -21,29 +21,43 @@ import by.epam.bicycle.service.impl.RentService;
 import by.epam.bicycle.service.impl.UserService;
 
 public class CloseRentCommand implements ActionCommand {
-	private static final String RENT_ID_PARAM = "rentid";
-	private static final String AMOUNT_PARAM = "amount";
+	public static final String RENT_ID_PARAM = "rentid";
+	public static final String AMOUNT_PARAM = "amount";
 	
+	private RentService rentService;
+	private UserService userService;
+	
+	public CloseRentCommand(RentService rentService, UserService userService) {
+		this.rentService = rentService;
+		this.userService = userService;
+	}
+
 	@Override
 	public CommandResponse execute(HttpServletRequest request) throws CommandException {
-		long rentId = Long.parseLong(request.getParameter(RENT_ID_PARAM));
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession();
 		String language = (String) session.getAttribute(SessionAttributes.LANGUAGE);
+		rentService.setLanguage(language);
+		userService.setLanguage(language);
 		
 		try {	
 			User user = (User) session.getAttribute(SessionAttributes.USER);
 			
-			//TO DO!! SEPARATE SERVICE
-			RentService rentService = new RentService(language);
+			long rentId = Long.parseLong(request.getParameter(RENT_ID_PARAM));
 			Rent rent = rentService.findEntityById(rentId);
 			rent.setFinishDateTime(new Date());
+			
 			BigDecimal amount = new BigDecimal(request.getParameter(AMOUNT_PARAM));
 			rent.setAmount(amount);
 			
 			rentService.updateById(rentId, rent);
 			
-			UserService userService = new UserService(language);
-			BigDecimal newBalance = user.getBalance().subtract(amount); 
+			BigDecimal currentBalance = user.getBalance();
+			if (currentBalance == null) {
+				currentBalance = new BigDecimal(0);
+			}
+		
+			BigDecimal newBalance = currentBalance.subtract(amount); 
+			
 			user.setBalance(newBalance);
 			userService.updateBalance(user.getId(), newBalance);			
 			

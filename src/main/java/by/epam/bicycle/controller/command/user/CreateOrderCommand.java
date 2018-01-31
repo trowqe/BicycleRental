@@ -24,7 +24,7 @@ public class CreateOrderCommand implements ActionCommand {
 	private static final String ORDER_TARIFF_ID_PARAM = "tariff";
 
 	public CommandResponse execute(HttpServletRequest request) throws CommandException {
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
 		String language = (String) session.getAttribute(SessionAttributes.LANGUAGE);	
 		User user =  (User) request.getSession().getAttribute(SessionAttributes.USER);
 		

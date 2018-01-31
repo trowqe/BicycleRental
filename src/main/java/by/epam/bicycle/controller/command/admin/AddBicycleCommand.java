@@ -15,12 +15,18 @@ import by.epam.bicycle.service.ServiceException;
 import by.epam.bicycle.service.impl.BicycleService;
 
 public class AddBicycleCommand implements ActionCommand {
-	private final static String RENTAL_POINT_ID_PARAM = "rentalpoint";
-	private final static String BICYCLE_MODEL_ID_PARAM = "bicyclemodel";
-
+	public final static String RENTAL_POINT_ID_PARAM = "rentalpoint";
+	public final static String BICYCLE_MODEL_ID_PARAM = "bicyclemodel";
+	
+	private BicycleService service;
+	
+	public AddBicycleCommand(BicycleService service) {
+		this.service = service;
+	}
+	
 	@Override
 	public CommandResponse execute(HttpServletRequest request) throws CommandException {
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
 		String language = (String) session.getAttribute(SessionAttributes.LANGUAGE);
 
 		String rentalPointIdParam = request.getParameter(RENTAL_POINT_ID_PARAM);
@@ -29,7 +35,6 @@ public class AddBicycleCommand implements ActionCommand {
 		long rentalPointId = Long.parseLong(rentalPointIdParam);
 		long bicycleModelId = Long.parseLong(bicycleModelIdParam);
 
-		BicycleService service = new BicycleService();
 		try {
 			service.createByPointAndModelId(rentalPointId, bicycleModelId);
 		} catch (ServiceException e) {

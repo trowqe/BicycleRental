@@ -17,7 +17,7 @@ import by.epam.bicycle.service.impl.RentService;
 import by.epam.bicycle.utils.TariffUtils;
 
 public class ReturnBicycleCommand implements ActionCommand {
-	private static final String RENT_ID_PARAM = "rentid";
+	public static final String RENT_ID_PARAM = "rentid";
 	private static final String RENT_ID_ATTRIBUTE = "rentid";
 	private static final String RENTPOINTID_ATTRIBUTE = "orderRentPointId";
 	private static final String BICYCLEID_ATTRIBUTE = "orderBicycleId";
@@ -28,15 +28,21 @@ public class ReturnBicycleCommand implements ActionCommand {
 	private static final String TARIFF_ATTRIBUTE = "tariff";
 	private static final String AMOUNT_ATTRIBUTE = "amount";
 	
+	private RentService rentService;
+	
+	public ReturnBicycleCommand(RentService rentService) {
+		this.rentService = rentService;
+	}
+
 	@Override
 	public CommandResponse execute(HttpServletRequest request) throws CommandException {
 		
 		long rentId = Long.parseLong(request.getParameter(RENT_ID_PARAM));
 		try {
-			HttpSession session = request.getSession(true);
+			HttpSession session = request.getSession();
 			String language = (String) session.getAttribute(SessionAttributes.LANGUAGE);
+			rentService.setLanguage(language);
 			
-			RentService rentService = new RentService(language);
 			Rent rent = rentService.findEntityById(rentId);
 			Bicycle bicycle = rent.getBicycle();
 			long rentPointId = bicycle.getPoint().getId();

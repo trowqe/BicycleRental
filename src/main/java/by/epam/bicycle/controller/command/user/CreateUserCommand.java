@@ -20,14 +20,16 @@ import by.epam.bicycle.service.impl.UserService;
 import by.epam.bicycle.utils.HashUtils;
 
 public class CreateUserCommand implements ActionCommand {
-	private final static String NAME_PARAM = "name";
-	private final static String SURNAME_PARAM = "surname";
-	private final static String PATRONYMIC_PARAM = "patronymic";
-	private final static String MOBILEPHONE_PARAM = "mobilephone";
-	private final static String EMAIL_PARAM = "email";
-	private final static String LOGIN_PARAM = "newlogin";
-	private final static String PASSWORD_PARAM = "newpassword";
-	private final static String REPEATPASSWORD_PARAM = "repeatpassword";
+	public final static String NAME_PARAM = "name";
+	public final static String SURNAME_PARAM = "surname";
+	public final static String PATRONYMIC_PARAM = "patronymic";
+	public final static String MOBILEPHONE_PARAM = "mobilephone";
+	public final static String EMAIL_PARAM = "email";
+	public final static String LOGIN_PARAM = "newlogin";
+	public final static String PASSWORD_PARAM = "newpassword";
+	public final static String REPEATPASSWORD_PARAM = "repeatpassword";
+	
+	private UserService userService;
 	
 	private User getUserFromRequest(HttpServletRequest request) {
 		String name = request.getParameter(NAME_PARAM);
@@ -59,7 +61,6 @@ public class CreateUserCommand implements ActionCommand {
 		
 		//check that login is unique
 		String login = request.getParameter(LOGIN_PARAM);
-		UserService userService = new UserService();
 		if (!userService.isLoginUnique(login)) {
 			String message = MessageManager.getProperty(language, MessageManager.LOGINNOTUNIQUE);
 			throw new ValidationException(message);
@@ -72,7 +73,6 @@ public class CreateUserCommand implements ActionCommand {
 		User newUser = getUserFromRequest(request);
 		try {
 			checkRequest(request);
-			UserService userService = new UserService();
 			userService.create(newUser);
 		} catch (ValidationException e) {
 			session.setAttribute(SessionAttributes.NEWUSER, newUser);

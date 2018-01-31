@@ -98,6 +98,20 @@ public class Rent extends Entity {
 		this.finishDateTime = finishDateTime;
 	}
 	
+	public void setCreateDateTime(int year, int month, int day, int hours, int minutes) {
+		Calendar cal = Calendar.getInstance();
+		cal.set(year, month, day, hours, minutes);
+		Date date = cal.getTime();
+		this.createDateTime = date;
+	}
+	
+	public void setFinishDateTime(int year, int month, int day, int hours, int minutes) {
+		Calendar cal = Calendar.getInstance();
+		cal.set(year, month, day, hours, minutes);
+		Date date = cal.getTime();
+		this.finishDateTime = date;
+	}
+	
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}

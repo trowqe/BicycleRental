@@ -20,27 +20,38 @@ import by.epam.bicycle.service.impl.BicycleTypeService;
 import by.epam.bicycle.service.impl.RentalPointService;
 
 public class FilterBicyclesCommand implements ActionCommand {
-	private static final String PARAM_NAME_RENTAL_POINT = "rentalpoint";
-	private static final String PARAM_NAME_BICYCLE_TYPE = "bicycletype";
-	private static final String PARAM_NAME_FIRM = "firm";
-	private static final String PARAM_NAME_MODEL = "model";
-	private static final String BICYCLES_ATTRIBUTE = "bicycles";
-	private static final String FIRM_ATTRIBUTE = "firm";
-	private static final String MODEL_ATTRIBUTE = "model";
-	private static final String RENTALPOINT_ATTRIBUTE = "rentalpoint";
-	private static final String BICYCLETYPE_ATTRIBUTE = "bicycletype";
-	private static final String RENTALPOINTS_ATTRIBUTE = "rentalPoints";
-	private static final String BICYCLETYPES_ATTRIBUTE = "bicycleTypes";
+	public static final String PARAM_NAME_RENTAL_POINT = "rentalpoint";
+	public static final String PARAM_NAME_BICYCLE_TYPE = "bicycletype";
+	public static final String PARAM_NAME_FIRM = "firm";
+	public static final String PARAM_NAME_MODEL = "model";
+	public static final String BICYCLES_ATTRIBUTE = "bicycles";
+	public static final String FIRM_ATTRIBUTE = "firm";
+	public static final String MODEL_ATTRIBUTE = "model";
+	public static final String RENTALPOINT_ATTRIBUTE = "rentalpoint";
+	public static final String BICYCLETYPE_ATTRIBUTE = "bicycletype";
+	public static final String RENTALPOINTS_ATTRIBUTE = "rentalPoints";
+	public static final String BICYCLETYPES_ATTRIBUTE = "bicycleTypes";
+	
+	private BicycleService bicycleService;
+	private RentalPointService rentalPointService;
+	private BicycleTypeService bicycleTypeService;
+	
+	
+	public FilterBicyclesCommand(BicycleService bicycleService, RentalPointService rentalPointService, BicycleTypeService bicycleTypeService) {
+		this.rentalPointService = rentalPointService;
+		this.bicycleTypeService = bicycleTypeService;
+		this.bicycleService = bicycleService;
+	}
 
 	private void loadFilter(HttpServletRequest request) throws ServiceException {
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession();
 		String language = (String) session.getAttribute(SessionAttributes.LANGUAGE);
 		
-		RentalPointService rentalPointService = new RentalPointService(language);
+		rentalPointService.setLanguage(language);
 		List<RentalPoint> rentalPoints = rentalPointService.findAll();
 		request.setAttribute(RENTALPOINTS_ATTRIBUTE, rentalPoints);
 		
-		BicycleTypeService bicycleTypeService = new BicycleTypeService(language);
+		bicycleTypeService.setLanguage(language);
 		List<BicycleType> bicycleTypes = bicycleTypeService.findAll();
 		request.setAttribute(BICYCLETYPES_ATTRIBUTE, bicycleTypes);
 	}
@@ -77,7 +88,7 @@ public class FilterBicyclesCommand implements ActionCommand {
 				model = modelParam;
 			}
 			
-			BicycleService bicycleService = new BicycleService(language);
+			bicycleService.setLanguage(language);
 			List<Bicycle> bicycles = bicycleService.getActiveBicyclesByFilter(rentalPointID, bicycleTypeID, firm, model);
 			
 			request.setAttribute(BICYCLES_ATTRIBUTE, bicycles);

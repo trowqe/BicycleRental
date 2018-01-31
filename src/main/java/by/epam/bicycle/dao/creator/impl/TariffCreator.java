@@ -3,7 +3,6 @@ package by.epam.bicycle.dao.creator.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import by.epam.bicycle.dao.creator.AbstractCreator;
 import by.epam.bicycle.dao.creator.EntityCreator;
 import by.epam.bicycle.dao.creator.EntityCreatorDirector;
 import by.epam.bicycle.entity.BicycleType;

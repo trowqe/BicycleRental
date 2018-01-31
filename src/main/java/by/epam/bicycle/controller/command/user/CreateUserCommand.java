@@ -6,8 +6,9 @@ import javax.servlet.http.HttpSession;
 import by.epam.bicycle.config.ConfigurationManager;
 import by.epam.bicycle.config.MessageManager;
 import by.epam.bicycle.config.SessionAttributes;
-import by.epam.bicycle.controller.ValidationException;
 import by.epam.bicycle.controller.command.ActionCommand;
+import by.epam.bicycle.controller.exception.CommandException;
+import by.epam.bicycle.controller.exception.ValidationException;
 import by.epam.bicycle.controller.response.CommandMessage;
 import by.epam.bicycle.controller.response.CommandMessageTypeEnum;
 import by.epam.bicycle.controller.response.CommandResponse;
@@ -66,7 +67,7 @@ public class CreateUserCommand implements ActionCommand {
 	}
 	
 	@Override
-	public CommandResponse execute(HttpServletRequest request) {
+	public CommandResponse execute(HttpServletRequest request) throws CommandException {
 		HttpSession session = request.getSession(true);
 		User newUser = getUserFromRequest(request);
 		try {
@@ -78,8 +79,7 @@ public class CreateUserCommand implements ActionCommand {
 			CommandMessage message = new CommandMessage(e, CommandMessageTypeEnum.WRONG);
 			return new RedirectResponse(CommandResponse.INDEX_PAGE, message);
 		} catch (ServiceException e) {
-			CommandMessage message = new CommandMessage(e, CommandMessageTypeEnum.WRONG);
-			return new RedirectResponse(CommandResponse.INDEX_PAGE, message);
+			throw new CommandException(e);
 		}		
 		
 		String language = (String) session.getAttribute(SessionAttributes.LANGUAGE);

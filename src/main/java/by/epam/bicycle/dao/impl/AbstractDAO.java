@@ -1,4 +1,4 @@
-package by.epam.bicycle.dao;
+package by.epam.bicycle.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.epam.bicycle.config.ConfigurationManager;
+import by.epam.bicycle.dao.DAOException;
+import by.epam.bicycle.dao.EntityDAO;
 import by.epam.bicycle.dao.creator.EntityCreator;
 import by.epam.bicycle.dao.creator.EntityCreatorDirector;
+import by.epam.bicycle.dao.pool.WrapperConnection;
 import by.epam.bicycle.entity.Entity;
 
 

@@ -1,5 +1,6 @@
-package by.epam.bicycle.dao.creator;
+package by.epam.bicycle.dao.creator.impl;
 
+import by.epam.bicycle.dao.creator.EntityCreator;
 import by.epam.bicycle.entity.Entity;
 
 public abstract class AbstractCreator<T extends Entity> implements EntityCreator<T> {

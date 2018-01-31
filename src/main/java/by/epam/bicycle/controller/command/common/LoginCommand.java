@@ -8,8 +8,8 @@ import org.apache.logging.log4j.Logger;
 
 import by.epam.bicycle.config.MessageManager;
 import by.epam.bicycle.config.SessionAttributes;
-import by.epam.bicycle.controller.CommandException;
 import by.epam.bicycle.controller.command.ActionCommand;
+import by.epam.bicycle.controller.exception.CommandException;
 import by.epam.bicycle.controller.response.CommandMessage;
 import by.epam.bicycle.controller.response.CommandMessageTypeEnum;
 import by.epam.bicycle.controller.response.CommandResponse;

@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import by.epam.bicycle.dao.AbstractDAO;
 import by.epam.bicycle.dao.DAOException;
 import by.epam.bicycle.entity.Rent;
 

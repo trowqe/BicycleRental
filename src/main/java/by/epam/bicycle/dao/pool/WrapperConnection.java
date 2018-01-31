@@ -1,4 +1,4 @@
-package by.epam.bicycle.dao;
+package by.epam.bicycle.dao.pool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

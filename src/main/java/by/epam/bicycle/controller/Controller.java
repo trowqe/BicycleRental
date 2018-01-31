@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import by.epam.bicycle.config.SessionAttributes;
 import by.epam.bicycle.controller.command.ActionCommand;
+import by.epam.bicycle.controller.exception.CommandException;
 import by.epam.bicycle.controller.response.CommandResponse;
 import by.epam.bicycle.controller.response.impl.RedirectResponse;
 

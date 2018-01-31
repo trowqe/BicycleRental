@@ -1,7 +1,8 @@
-package by.epam.bicycle.controller.command;
+package by.epam.bicycle.controller.command.common;
 
 import javax.servlet.http.HttpServletRequest;
 
+import by.epam.bicycle.controller.command.ActionCommand;
 import by.epam.bicycle.controller.response.CommandResponse;
 import by.epam.bicycle.controller.response.impl.ForwardResponse;
 

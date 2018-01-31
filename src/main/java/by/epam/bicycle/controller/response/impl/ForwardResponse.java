@@ -7,7 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import by.epam.bicycle.controller.response.AbstractResponse;
 import by.epam.bicycle.controller.response.CommandMessage;
 
 public class ForwardResponse extends AbstractResponse {

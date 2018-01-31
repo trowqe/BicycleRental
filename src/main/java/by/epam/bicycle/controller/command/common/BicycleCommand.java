@@ -1,12 +1,12 @@
-package by.epam.bicycle.controller.command.admin;
+package by.epam.bicycle.controller.command.common;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import by.epam.bicycle.controller.CommandException;
 import by.epam.bicycle.controller.command.ActionCommand;
+import by.epam.bicycle.controller.exception.CommandException;
 import by.epam.bicycle.controller.response.CommandResponse;
 import by.epam.bicycle.controller.response.impl.ForwardResponse;
 import by.epam.bicycle.entity.Bicycle;

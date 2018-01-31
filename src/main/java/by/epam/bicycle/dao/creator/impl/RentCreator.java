@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import by.epam.bicycle.dao.creator.AbstractCreator;
 import by.epam.bicycle.dao.creator.EntityCreator;
 import by.epam.bicycle.dao.creator.EntityCreatorDirector;
 import by.epam.bicycle.entity.Bicycle;

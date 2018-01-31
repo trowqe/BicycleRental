@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-import by.epam.bicycle.dao.AbstractDAO;
 import by.epam.bicycle.dao.DAOException;
 import by.epam.bicycle.entity.Bicycle;
 

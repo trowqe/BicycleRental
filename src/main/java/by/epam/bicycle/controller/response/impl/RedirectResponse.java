@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import by.epam.bicycle.controller.response.AbstractResponse;
 import by.epam.bicycle.controller.response.CommandMessage;
 
 public class RedirectResponse extends AbstractResponse {

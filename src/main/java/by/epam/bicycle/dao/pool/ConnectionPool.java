@@ -1,4 +1,4 @@
-package by.epam.bicycle.dao;
+package by.epam.bicycle.dao.pool;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;

@@ -1,7 +1,7 @@
 package by.epam.bicycle.controller.command;
 
 import by.epam.bicycle.controller.command.admin.AddBicycleCommand;
-import by.epam.bicycle.controller.command.admin.BicycleCommand;
+import by.epam.bicycle.controller.command.common.BicycleCommand;
 import by.epam.bicycle.controller.command.admin.DeleteBicycleCommand;
 import by.epam.bicycle.controller.command.admin.UpdateBicycleCommand;
 import by.epam.bicycle.controller.command.admin.UpdateUserStatusCommand;

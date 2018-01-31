@@ -1,9 +1,11 @@
-package by.epam.bicycle.controller.response;
+package by.epam.bicycle.controller.response.impl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import by.epam.bicycle.config.SessionAttributes;
+import by.epam.bicycle.controller.response.CommandMessage;
+import by.epam.bicycle.controller.response.CommandResponse;
 
 public abstract class AbstractResponse implements CommandResponse {
 	private String page;

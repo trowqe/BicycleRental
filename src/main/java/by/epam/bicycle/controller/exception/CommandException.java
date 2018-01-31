@@ -1,4 +1,4 @@
-package by.epam.bicycle.controller;
+package by.epam.bicycle.controller.exception;
 
 public class CommandException extends Exception {
 	private static final long serialVersionUID = 1L;

@@ -2,7 +2,6 @@ package by.epam.bicycle.dao.impl;
 
 import java.sql.Connection;
 
-import by.epam.bicycle.dao.AbstractDAO;
 import by.epam.bicycle.dao.DAOException;
 import by.epam.bicycle.entity.BicycleType;
 

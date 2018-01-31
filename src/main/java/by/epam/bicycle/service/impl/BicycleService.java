@@ -3,11 +3,10 @@ package by.epam.bicycle.service.impl;
 import java.sql.Connection;
 import java.util.List;
 
-import by.epam.bicycle.dao.ConnectionPool;
 import by.epam.bicycle.dao.DAOException;
 import by.epam.bicycle.dao.impl.BicycleDAO;
+import by.epam.bicycle.dao.pool.ConnectionPool;
 import by.epam.bicycle.entity.Bicycle;
-import by.epam.bicycle.service.AbstractService;
 import by.epam.bicycle.service.ServiceException;
 
 public class BicycleService extends AbstractService<Bicycle> {

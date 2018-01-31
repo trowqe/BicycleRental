@@ -4,7 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import by.epam.bicycle.controller.command.ActionCommand;
 import by.epam.bicycle.controller.command.CommandEnum;
-import by.epam.bicycle.controller.command.EmptyCommand;
+import by.epam.bicycle.controller.command.common.EmptyCommand;
+import by.epam.bicycle.controller.exception.CommandException;
 
 public class ActionFactory {
 	private static final String COMMAND_PARAM = "command";

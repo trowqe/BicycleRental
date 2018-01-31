@@ -1,5 +1,6 @@
 package by.epam.bicycle.dao;
 
+import by.epam.bicycle.dao.impl.AbstractDAO;
 import by.epam.bicycle.dao.impl.BicycleDAO;
 import by.epam.bicycle.dao.impl.BicycleModelDAO;
 import by.epam.bicycle.dao.impl.BicycleTypeDAO;

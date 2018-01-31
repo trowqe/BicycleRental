@@ -1,15 +1,17 @@
-package by.epam.bicycle.service;
+package by.epam.bicycle.service.impl;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
 import by.epam.bicycle.config.ConfigurationManager;
-import by.epam.bicycle.dao.AbstractDAO;
-import by.epam.bicycle.dao.ConnectionPool;
 import by.epam.bicycle.dao.DAOException;
 import by.epam.bicycle.dao.DAOFactory;
+import by.epam.bicycle.dao.impl.AbstractDAO;
+import by.epam.bicycle.dao.pool.ConnectionPool;
 import by.epam.bicycle.entity.Entity;
+import by.epam.bicycle.service.EntityService;
+import by.epam.bicycle.service.ServiceException;
 
 public abstract class AbstractService<T extends Entity> implements EntityService<T> {
 	private final Class<T> entityClass; 

@@ -25,90 +25,36 @@ import by.epam.bicycle.service.impl.TariffService;
 import by.epam.bicycle.service.impl.UserService;
 
 public enum CommandEnum {
-	LOGIN {
-		{
-			this.command = new LoginCommand(new UserService());
-		}
-	},
-	LOGOUT {
-		{
-			this.command = new LogoutCommand();
-		}
-	},
-	FILTERBICYCLES {
-		{
-			this.command = new FilterBicyclesCommand(new BicycleService(), new RentalPointService(), new BicycleTypeService());
-		}
-	},
-	PREPAREORDER {
-		{
-			this.command = new PrepareOrderCommand(new BicycleService(), new TariffService());
-		}
-	},
-	CREATEORDER {
-		{
-			this.command = new CreateOrderCommand();
-		}
-	}, 
-	CHANGELANGUAGE {
-		{
-			this.command = new ChangeLanguageCommand();
-		}
-	},
-	CREATEUSER {
-		{
-			this.command = new CreateUserCommand();
-		}
-	},
-	RENTS {
-		{
-			this.command = new RentsCommand(new RentService());
-		}
-	},
-	RETURNBICYCLE {
-		{
-			this.command = new ReturnBicycleCommand(new RentService());
-		}
-	},
-	CLOSERENT {
-		{
-			this.command = new CloseRentCommand(new RentService(), new UserService());
-		}
-	},
-	USERS {
-		{
-			this.command = new UsersCommand(new UserService());
-		}
-	},
-	UPDATEUSERSTATUS {
-		{
-			this.command = new UpdateUserStatusCommand(new UserService());
-		}
-	},
-	BICYCLE {
-		{
-			this.command = new BicycleCommand(new BicycleService(), new RentalPointService(), new BicycleModelService());
-		}
-	},
-	ADDBICYCLE {
-		{
-			this.command = new AddBicycleCommand(new BicycleService());
-		}
-	},
-	UPDATEBICYCLE {
-		{
-			this.command = new UpdateBicycleCommand(new BicycleService());
-		}
-	},
-	DELETEBICYCLE {
-		{
-			this.command = new DeleteBicycleCommand(new BicycleService());
-		}
-	};
-	ActionCommand command;
+	LOGIN(new LoginCommand(new UserService())),
+	LOGOUT(new LogoutCommand()),
+	FILTERBICYCLES(new FilterBicyclesCommand(new BicycleService(), new RentalPointService(), new BicycleTypeService())),
+	PREPAREORDER(new PrepareOrderCommand(new BicycleService(), new TariffService())),
+	CREATEORDER(new CreateOrderCommand()), 
+	CHANGELANGUAGE(new ChangeLanguageCommand()),
+	CREATEUSER(new CreateUserCommand()),
+	RENTS(new RentsCommand(new RentService())),
+	RETURNBICYCLE(new ReturnBicycleCommand(new RentService())),
+	CLOSERENT(new CloseRentCommand(new RentService(), new UserService())),
+	USERS(new UsersCommand(new UserService())),
+	UPDATEUSERSTATUS(new UpdateUserStatusCommand(new UserService())),
+	BICYCLE(new BicycleCommand(new BicycleService(), new RentalPointService(), new BicycleModelService())),
+	ADDBICYCLE(new AddBicycleCommand(new BicycleService())),
+	UPDATEBICYCLE(new UpdateBicycleCommand(new BicycleService())),
+	DELETEBICYCLE(new DeleteBicycleCommand(new BicycleService()));
+	
+	private ActionCommand command;	
 
-	public ActionCommand getCurrentCommand() {
+	public ActionCommand getCommand() {
 		return command;
 	}
+
+	public void setCommand(ActionCommand command) {
+		this.command = command;
+	}
+
+	private CommandEnum(ActionCommand command) {
+		this.command = command;
+	}	
+	
 
 }

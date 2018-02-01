@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface CommandResponse {
 	String INDEX_PAGE = "/index.jsp";
-	String LOGIN_PAGE = "/jsp/login.jsp";
+	String LOGIN_PAGE = "/jsp/common/login.jsp";
 	String BICYCLES_PAGE = "/jsp/user/bicycles.jsp";
 	String PREPAREORDER_PAGE = "/jsp/user/prepareorder.jsp";
 	String RENTS_PAGE = "/jsp/user/rents.jsp";

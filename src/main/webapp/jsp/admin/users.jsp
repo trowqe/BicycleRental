@@ -38,7 +38,6 @@
 							<th><fmt:message key="users.table.mobilephone"/></th>
 							<th><fmt:message key="users.table.email"/></th>
 							<th><fmt:message key="users.table.login"/></th>
-							<th><fmt:message key="users.table.lastenterdatetime"/></th>
 							<th><fmt:message key="users.table.status"/></th>
 							<th class="center"><fmt:message key="users.table.balance"/></th>
 						</tr>
@@ -50,7 +49,6 @@
 								<td>${elem.getMobilePhone()}</td>
 								<td>${elem.getEmail()}</td>
 								<td>${elem.getLogin()}</td>
-								<td><fmt:formatDate type = "both" value = "${elem.getLastEnterDateTime()}" /></td>
 								<td>
 									<c:choose>
 									<c:when test="${elem.getStatus() == 0}">

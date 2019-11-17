@@ -10,7 +10,7 @@
 	<uri>/jsp/taglib/alertbox</uri>
 	<tag>
 		<name>alertbox</name>
-		<tag-class>by.epam.bicycle.controller.jsp.AlertBoxHandler</tag-class>
+		<tag-class>by.bokshic.bicycle.controller.jsp.AlertBoxHandler</tag-class>
 		<body-content>empty</body-content>
 	</tag>
 </taglib>  

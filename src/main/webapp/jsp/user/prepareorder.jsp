@@ -7,10 +7,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title><fmt:message key="common.head.title"/></title>
-	<c:import url="..\common\fragment\links.jsp" />
+	<c:import url="../common/fragment/links.jsp" />
 </head>
 <body>
-	<c:import url="fragment\header.jsp" />
+	<c:import url="fragment/header.jsp" />
 	<main>
 		<section id="id03">
 			<div class="content-single grey filter">			
@@ -40,5 +40,5 @@
 		</div>					
 	</section>
 </main>
-<c:import url="..\common\fragment\footer.jsp" />
+<c:import url="../common/fragment/footer.jsp" />
 </body>

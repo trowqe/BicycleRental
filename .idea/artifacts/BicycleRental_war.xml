@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="BicycleRental:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>BicycleRental</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="bicyclerental.war">
+      <element id="artifact" artifact-name="BicycleRental:war exploded" />
+    </root>
+  </artifact>
+</component>
